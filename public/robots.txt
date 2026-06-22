@@ -1,0 +1,5 @@
+# StudNexus — robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://studnexus.com/sitemap.xml

@@ -1,0 +1,2 @@
+# Netlify SPA fallback — route all paths to the app shell
+/*    /index.html   200
