@@ -1,0 +1,13 @@
+{
+  // Cloudflare Workers static-assets deployment for the StudNexus SPA.
+  // The build (`npm run build`) outputs to ./dist, which is served directly as
+  // static assets — no Worker script, no Vite plugin, no Vite 6 requirement.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "poweredai",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for unknown paths so client-side routing (404 page, etc.) works.
+    "not_found_handling": "single-page-application"
+  }
+}
