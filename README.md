@@ -25,8 +25,8 @@ Dark, AI-native, glassmorphic design inspired by Linear, Stripe, Vercel & Perple
 - **SEO**: rich meta, Open Graph, Twitter cards, JSON-LD (Organization, Website,
   SoftwareApplication, FAQ), `sitemap.xml`, `robots.txt`, canonical, manifest.
 - **Analytics-ready**: GA4, Microsoft Clarity, PostHog — all via env vars.
-- **Deploy-ready**: Cloudflare Pages / Vercel / Netlify with SPA fallback
-  (`_redirects`, `_headers`, `vercel.json`).
+- **Deploy-ready**: Cloudflare (Workers static assets via `wrangler.jsonc`) /
+  Vercel (`vercel.json`) with SPA fallback + security headers (`_headers`).
 
 ---
 
