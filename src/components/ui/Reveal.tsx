@@ -42,11 +42,17 @@ export const staggerItem: Variants = {
 export function StaggerGroup({
   children,
   className,
-  amount = 0.2,
+  amount = "some",
 }: {
   children: ReactNode;
   className?: string;
-  amount?: number;
+  /**
+   * How much of the group must be visible to trigger. Defaults to "some"
+   * (any part) — using a numeric fraction can NEVER be satisfied when the
+   * group is taller than the viewport (e.g. long card grids on mobile),
+   * leaving the children stuck at opacity 0.
+   */
+  amount?: number | "some" | "all";
 }) {
   return (
     <motion.div
@@ -54,7 +60,7 @@ export function StaggerGroup({
       variants={staggerContainer}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount }}
+      viewport={{ once: true, amount, margin: "0px 0px -10% 0px" }}
     >
       {children}
     </motion.div>
