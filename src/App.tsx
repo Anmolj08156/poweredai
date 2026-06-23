@@ -19,7 +19,11 @@ export default function App() {
   return (
     <>
       <Helmet>
-        <title>StudNexus — The Learning Operating System | One Platform. Every Learner.</title>
+        <title>StudNexus - AI Powered Learning Operating System for Students</title>
+        <meta
+          name="description"
+          content="StudNexus is an AI-powered Learning Operating System that helps students organize notes, generate quizzes, chat with PDFs, and accelerate learning."
+        />
         <link rel="canonical" href="https://studnexus.com/" />
       </Helmet>
 

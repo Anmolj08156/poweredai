@@ -48,12 +48,19 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tightest sm:text-6xl md:text-[4.25rem]"
+              className="mt-6 text-balance text-5xl font-semibold leading-[1.02] tracking-tightest sm:text-7xl md:text-[5rem]"
             >
-              <span className="text-gradient">The Learning</span>
-              <br />
-              <span className="text-gradient-brand">Operating System</span>
+              <span className="text-gradient-brand">StudNexus</span>
             </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-3 text-balance text-2xl font-semibold leading-tight tracking-tight text-gradient sm:text-3xl md:text-4xl"
+            >
+              The AI-Powered Learning Operating System
+            </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}

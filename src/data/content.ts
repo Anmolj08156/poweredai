@@ -276,10 +276,19 @@ export const FOOTER_LINKS = [
   {
     heading: "Product",
     links: [
+      { label: "AI Notes Generator", href: "/ai-notes-generator" },
+      { label: "Chat With PDFs", href: "/chat-with-pdfs" },
+      { label: "AI Quiz Generator", href: "/ai-quiz-generator" },
+      { label: "Study Planner", href: "/study-planner" },
+    ],
+  },
+  {
+    heading: "Explore",
+    links: [
+      { label: "What is StudNexus?", href: "/what-is-studnexus" },
+      { label: "Community & Creators", href: "/community" },
       { label: "Features", href: "#features" },
-      { label: "For Learners", href: "#categories" },
-      { label: "How it works", href: "#how" },
-      { label: "Early Access", href: "#early-access" },
+      { label: "FAQ", href: "#faq" },
     ],
   },
   {
@@ -289,15 +298,6 @@ export const FOOTER_LINKS = [
       { label: "Contact", href: "mailto:anmol@datasmithlabs.com" },
       { label: "Privacy Policy", href: "#" },
       { label: "Terms", href: "#" },
-    ],
-  },
-  {
-    heading: "Resources",
-    links: [
-      { label: "FAQ", href: "#faq" },
-      { label: "Blog", href: "#" },
-      { label: "Community", href: "#features" },
-      { label: "Changelog", href: "#" },
     ],
   },
 ] as const;

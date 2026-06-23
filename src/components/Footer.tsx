@@ -1,4 +1,5 @@
 import { Mail, Twitter, Linkedin, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Logo } from "./ui/Logo";
 import { FOOTER_LINKS } from "../data/content";
 import { SITE } from "../lib/config";
@@ -62,6 +63,13 @@ export function Footer() {
                       >
                         {link.label}
                       </button>
+                    ) : link.href.startsWith("/") ? (
+                      <Link
+                        to={link.href}
+                        className="text-sm text-ink-muted transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </Link>
                     ) : (
                       <a
                         href={link.href}
