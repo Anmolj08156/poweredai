@@ -32,6 +32,7 @@ import {
 
 export const NAV_LINKS = [
   { label: "Features", href: "#features" },
+  { label: "Explore", href: "#explore" },
   { label: "For Everyone", href: "#categories" },
   { label: "How it works", href: "#how" },
   { label: "FAQ", href: "#faq" },

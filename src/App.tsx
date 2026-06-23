@@ -6,6 +6,7 @@ import { LogoMarquee } from "./components/LogoMarquee";
 import { Problem } from "./components/Problem";
 import { Solution } from "./components/Solution";
 import { Features } from "./components/Features";
+import { ExplorePages } from "./components/ExplorePages";
 import { Categories } from "./components/Categories";
 import { HowItWorks } from "./components/HowItWorks";
 import { SocialProof } from "./components/SocialProof";
@@ -36,6 +37,7 @@ export default function App() {
         <Problem />
         <Solution />
         <Features />
+        <ExplorePages />
         <Categories />
         <HowItWorks />
         <SocialProof />
