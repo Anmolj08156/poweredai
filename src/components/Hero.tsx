@@ -61,8 +61,8 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
               className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-ink-muted sm:text-lg lg:mx-0"
             >
-              StudNexus helps learners organize knowledge, understand concepts, practice
-              effectively, and retain information long-term — all powered by AI, all in one place.
+              StudNexus helps learners understand, practice and retain knowledge with AI — and
+              gives educators & creators a home to publish, share and grow their notes.
             </motion.p>
 
             <motion.div

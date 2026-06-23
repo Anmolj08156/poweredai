@@ -6,7 +6,7 @@
  * (This keeps the SAME /exec URL — no need to update the website.)
  *
  * Receives JSON bodies:
- *   Waitlist : { id, email, name, created_at, source, device }
+ *   Waitlist : { id, email, name, role, created_at, source, device }
  *   Demo     : { type:"demo", id, name, email, preferred_date,
  *                preferred_time, exam, created_at, source, device }
  *
@@ -14,7 +14,7 @@
  * (auto-created on first request).
  */
 
-var WAITLIST_HEADERS = ['id', 'email', 'name', 'created_at', 'source', 'device'];
+var WAITLIST_HEADERS = ['id', 'email', 'name', 'role', 'created_at', 'source', 'device'];
 var DEMO_HEADERS = [
   'id', 'name', 'email', 'preferred_date', 'preferred_time', 'exam',
   'created_at', 'source', 'device',
@@ -49,6 +49,7 @@ function handleWaitlist(data) {
     data.id || '',
     email,
     data.name || '',
+    data.role || '',
     data.created_at || new Date().toISOString(),
     data.source || 'direct',
     data.device || '',

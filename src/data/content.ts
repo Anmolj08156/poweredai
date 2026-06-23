@@ -32,10 +32,20 @@ import {
 
 export const NAV_LINKS = [
   { label: "Features", href: "#features" },
-  { label: "For Learners", href: "#categories" },
+  { label: "For Everyone", href: "#categories" },
   { label: "How it works", href: "#how" },
   { label: "FAQ", href: "#faq" },
 ] as const;
+
+/* ------------------------------ Waitlist role --------------------------- */
+
+export const WAITLIST_ROLES = [
+  { value: "Learner", label: "Learner", hint: "I'm here to study" },
+  { value: "Educator", label: "Educator / Creator", hint: "I'll share & promote notes" },
+  { value: "Both", label: "Both", hint: "I learn and create" },
+] as const;
+
+export type WaitlistRole = (typeof WAITLIST_ROLES)[number]["value"];
 
 /* ------------------------------- Problems ------------------------------- */
 
@@ -106,10 +116,10 @@ export const FEATURES: Feature[] = [
   },
   {
     icon: Users,
-    title: "Community",
-    tagline: "Learn together, not alone.",
+    title: "Community & Creators",
+    tagline: "Create, share & get discovered.",
     description:
-      "A shared library where serious learners upload, discover and upvote the best notes for every exam — the smartest study group you'll ever have.",
+      "Educators and top students publish their notes, build an audience and promote their work — while learners discover and upvote the best material for every exam.",
     accent: "from-indigo-500/20 to-transparent",
     advanced: true,
   },

@@ -30,11 +30,11 @@ export function EarlyAccessCTA() {
               Limited early access
             </span>
             <h2 className="mt-5 text-balance text-3xl font-semibold tracking-tightest text-gradient sm:text-5xl">
-              Be among the first learners
+              Be among the first
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-pretty text-base text-ink-muted sm:text-lg">
-              Join the waitlist today and get early access to the Learning Operating System built
-              for the way you actually study.
+              Join the waitlist today — whether you're here to learn or to share what you know — and
+              get early access to the Learning Operating System.
             </p>
 
             <div className="mx-auto mt-8 max-w-xl">

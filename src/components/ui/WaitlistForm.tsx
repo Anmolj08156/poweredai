@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, AlertCircle, Check } from "lucide-react";
 import { submitWaitlist, type SubmitResult } from "../../lib/waitlist";
+import { WAITLIST_ROLES } from "../../data/content";
 import { cn } from "../../lib/utils";
 
 interface WaitlistFormProps {
@@ -24,6 +25,7 @@ export function WaitlistForm({
 }: WaitlistFormProps) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [role, setRole] = useState("");
   const [company, setCompany] = useState(""); // honeypot
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -34,13 +36,14 @@ export function WaitlistForm({
     setStatus("loading");
     setMessage("");
 
-    const result: SubmitResult = await submitWaitlist({ email, name, company });
+    const result: SubmitResult = await submitWaitlist({ email, name, role, company });
 
     if (result.ok) {
       setStatus("success");
       setMessage("You're on the list. We'll be in touch soon.");
       setEmail("");
       setName("");
+      setRole("");
     } else if (result.reason === "duplicate") {
       setStatus("success");
       setMessage(result.message);
@@ -71,6 +74,38 @@ export function WaitlistForm({
             onChange={(e) => setCompany(e.target.value)}
           />
         </label>
+      </div>
+
+      {/* Role selector (required) */}
+      <div className="mb-3">
+        <p className="mb-2 text-xs font-medium text-ink-muted">I'm joining as a…</p>
+        <div className="grid grid-cols-3 gap-2">
+          {WAITLIST_ROLES.map((r) => {
+            const active = role === r.value;
+            return (
+              <button
+                key={r.value}
+                type="button"
+                onClick={() => setRole(r.value)}
+                aria-pressed={active}
+                className={cn(
+                  "group relative flex flex-col items-start gap-0.5 rounded-xl border px-3 py-2 text-left transition-all",
+                  active
+                    ? "border-brand-400/60 bg-brand-500/15"
+                    : "border-white/10 bg-white/[0.02] hover:border-white/20"
+                )}
+              >
+                <span className="flex w-full items-center justify-between">
+                  <span className={cn("text-sm font-semibold", active ? "text-white" : "text-zinc-200")}>
+                    {r.label}
+                  </span>
+                  {active && <Check className="h-3.5 w-3.5 shrink-0 text-brand-300" />}
+                </span>
+                <span className="hidden text-[11px] leading-tight text-ink-soft sm:block">{r.hint}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <div

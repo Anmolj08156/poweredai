@@ -17,6 +17,7 @@ export interface WaitlistEntry {
   id: string;
   email: string;
   name?: string;
+  role: string; // "Learner" | "Educator" | "Both"
   created_at: string; // ISO timestamp
   source: string; // referral source
   device: string; // device / UA summary
@@ -28,7 +29,11 @@ const RATE_LIMIT_MS = 8_000; // min gap between submissions per device
 
 export type SubmitResult =
   | { ok: true; entry: WaitlistEntry }
-  | { ok: false; reason: "invalid_email" | "duplicate" | "rate_limited" | "honeypot" | "error"; message: string };
+  | {
+      ok: false;
+      reason: "invalid_email" | "invalid_role" | "duplicate" | "rate_limited" | "honeypot" | "error";
+      message: string;
+    };
 
 /* --------------------------------- Read --------------------------------- */
 
@@ -111,6 +116,8 @@ function uid(): string {
 export interface SubmitInput {
   email: string;
   name?: string;
+  /** Required: "Learner" | "Educator" | "Both". */
+  role?: string;
   /** Honeypot field — must stay empty for a human. */
   company?: string;
 }
@@ -123,10 +130,14 @@ export async function submitWaitlist(input: SubmitInput): Promise<SubmitResult> 
 
   const email = input.email.trim().toLowerCase();
   const name = input.name?.trim() || undefined;
+  const role = input.role?.trim() || "";
 
   // 2. Validation
   if (!isValidEmail(email)) {
     return { ok: false, reason: "invalid_email", message: "Please enter a valid email address." };
+  }
+  if (!role) {
+    return { ok: false, reason: "invalid_role", message: "Please tell us if you're a learner, educator or both." };
   }
 
   // 3. Rate limit (per device)
@@ -146,6 +157,7 @@ export async function submitWaitlist(input: SubmitInput): Promise<SubmitResult> 
     id: uid(),
     email,
     name,
+    role,
     created_at: new Date().toISOString(),
     source: detectSource(),
     device: detectDevice(),

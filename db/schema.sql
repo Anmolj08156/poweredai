@@ -7,6 +7,7 @@ create table if not exists early_access_waitlist (
   id          uuid primary key default gen_random_uuid(),
   email       text not null,
   name        text,
+  role        text,                       -- 'Learner' | 'Educator' | 'Both'
   created_at  timestamptz not null default now(),
   source      text default 'direct',
   device      text
