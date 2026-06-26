@@ -17,7 +17,7 @@ export function AmbientBackground() {
       <div className="absolute top-[55%] -right-40 h-[36rem] w-[36rem] rounded-full bg-brand-400/15 blur-[130px] animate-aurora [animation-delay:-6s]" />
 
       {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(9,9,11,0.7)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(24,16,9,0.7)_100%)]" />
     </div>
   );
 }

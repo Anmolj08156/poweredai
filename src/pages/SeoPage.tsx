@@ -65,7 +65,7 @@ export default function SeoPage({ slug }: { slug: string }) {
             <page.icon className="h-3.5 w-3.5 text-brand-400" />
             {page.eyebrow}
           </span>
-          <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tightest text-gradient sm:text-5xl">
+          <h1 className="mt-5 font-display text-balance text-4xl font-bold tracking-tight text-gradient sm:text-5xl">
             {page.h1}
           </h1>
           <p className="mt-5 text-pretty text-lg leading-relaxed text-ink-muted">{page.intro}</p>
@@ -159,7 +159,7 @@ export default function SeoPage({ slug }: { slug: string }) {
 
         {/* Bottom CTA */}
         <section className="my-20 border-gradient overflow-hidden rounded-4xl bg-ink-card px-6 py-12 text-center sm:px-12 sm:py-16">
-          <h2 className="text-balance text-2xl font-semibold tracking-tightest text-gradient sm:text-3xl">
+          <h2 className="font-display text-balance text-2xl font-bold tracking-tight text-gradient sm:text-3xl">
             Ready to learn the smarter way?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">

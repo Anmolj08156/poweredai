@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
       {/* Top spotlight */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[40rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(124,58,237,0.18),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[40rem] bg-[radial-gradient(60%_50%_at_50%_0%,rgba(236,139,13,0.18),transparent_70%)]" />
 
       <div className="shell">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
@@ -48,7 +48,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 text-balance text-5xl font-semibold leading-[1.02] tracking-tightest sm:text-7xl md:text-[5rem]"
+              className="mt-6 font-display text-balance text-6xl font-bold leading-[1.04] tracking-tight sm:text-7xl md:text-[5.25rem]"
             >
               <span className="text-gradient-brand">StudNexus</span>
             </motion.h1>
@@ -57,7 +57,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-3 text-balance text-2xl font-semibold leading-tight tracking-tight text-gradient sm:text-3xl md:text-4xl"
+              className="mt-3 font-display text-balance text-2xl font-medium italic leading-tight text-gradient sm:text-3xl md:text-4xl"
             >
               The AI-Powered Learning Operating System
             </motion.p>
@@ -87,11 +87,11 @@ export function Hero() {
                 </button>
                 <div className="flex items-center gap-2 text-sm text-ink-muted">
                   <div className="flex -space-x-2">
-                    {["#7c3aed", "#a855f7", "#4f46e5", "#6366f1"].map((c, i) => (
+                    {["#ec8b0d", "#f5a623", "#d97706", "#c66f0a"].map((c, i) => (
                       <span
                         key={i}
                         className="h-7 w-7 rounded-full border-2 border-ink bg-gradient-to-br"
-                        style={{ background: `linear-gradient(135deg, ${c}, #18181b)` }}
+                        style={{ background: `linear-gradient(135deg, ${c}, #241910)` }}
                       />
                     ))}
                   </div>

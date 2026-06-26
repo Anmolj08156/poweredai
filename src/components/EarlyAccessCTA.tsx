@@ -29,7 +29,7 @@ export function EarlyAccessCTA() {
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
               Limited early access
             </span>
-            <h2 className="mt-5 text-balance text-3xl font-semibold tracking-tightest text-gradient sm:text-5xl">
+            <h2 className="mt-5 font-display text-balance text-3xl font-bold tracking-tight text-gradient sm:text-5xl">
               Be among the first
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-pretty text-base text-ink-muted sm:text-lg">

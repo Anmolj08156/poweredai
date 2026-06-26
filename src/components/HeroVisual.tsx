@@ -15,12 +15,12 @@ import {
  */
 
 const NODES = [
-  { icon: FileText, label: "Resources", angle: -90, color: "#a855f7" },
-  { icon: Sparkles, label: "Understand", angle: -30, color: "#7c3aed" },
-  { icon: Target, label: "Practice", angle: 30, color: "#4f46e5" },
-  { icon: LineChart, label: "Track", angle: 90, color: "#8b5cf6" },
-  { icon: RefreshCw, label: "Revise", angle: 150, color: "#a855f7" },
-  { icon: BrainCircuit, label: "Connect", angle: 210, color: "#6366f1" },
+  { icon: FileText, label: "Resources", angle: -90, color: "#f5a623" },
+  { icon: Sparkles, label: "Understand", angle: -30, color: "#ec8b0d" },
+  { icon: Target, label: "Practice", angle: 30, color: "#d97706" },
+  { icon: LineChart, label: "Track", angle: 90, color: "#f0992e" },
+  { icon: RefreshCw, label: "Revise", angle: 150, color: "#f5a623" },
+  { icon: BrainCircuit, label: "Connect", angle: 210, color: "#c66f0a" },
 ];
 
 const RADIUS = 38; // percentage of container
@@ -47,8 +47,8 @@ export function HeroVisual() {
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.05" />
+            <stop offset="0%" stopColor="#ec8b0d" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#d97706" stopOpacity="0.05" />
           </linearGradient>
         </defs>
         {NODES.map((n, i) => {
@@ -168,7 +168,7 @@ function FloatingCard({
   tone: "emerald" | "violet" | "indigo";
 }) {
   const dot =
-    tone === "emerald" ? "bg-emerald-400" : tone === "violet" ? "bg-brand-400" : "bg-indigo-400";
+    tone === "emerald" ? "bg-emerald-400" : tone === "violet" ? "bg-brand-400" : "bg-brand-300";
   return (
     <motion.div
       className={`absolute hidden sm:block ${className}`}

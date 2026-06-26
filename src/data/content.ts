@@ -87,11 +87,11 @@ export const PROBLEMS: ProblemItem[] = [
 /* ------------------------------- Solution ------------------------------- */
 
 export const SOLUTION_PILLARS = [
-  { label: "Understand", icon: BrainCircuit, color: "from-violet-400 to-violet-600" },
-  { label: "Practice", icon: Target, color: "from-indigo-400 to-indigo-600" },
-  { label: "Revise", icon: RefreshCw, color: "from-fuchsia-400 to-fuchsia-600" },
-  { label: "Track", icon: LineChart, color: "from-purple-400 to-purple-600" },
-  { label: "Master", icon: Trophy, color: "from-violet-400 to-indigo-600" },
+  { label: "Understand", icon: BrainCircuit, color: "from-amber-400 to-amber-600" },
+  { label: "Practice", icon: Target, color: "from-orange-400 to-orange-600" },
+  { label: "Revise", icon: RefreshCw, color: "from-yellow-400 to-amber-500" },
+  { label: "Track", icon: LineChart, color: "from-amber-500 to-orange-600" },
+  { label: "Master", icon: Trophy, color: "from-orange-400 to-amber-600" },
 ] as const;
 
 /* ------------------------------- Features ------------------------------- */
@@ -113,7 +113,7 @@ export const FEATURES: Feature[] = [
     tagline: "Upload. Understand. Explore.",
     description:
       "Bring your PDFs, notes and resources into one intelligent workspace that reads, structures and indexes everything for you.",
-    accent: "from-violet-500/20 to-transparent",
+    accent: "from-amber-500/15 to-transparent",
   },
   {
     icon: Users,
@@ -121,7 +121,7 @@ export const FEATURES: Feature[] = [
     tagline: "Create, share & get discovered.",
     description:
       "Educators and top students publish their notes, build an audience and promote their work — while learners discover and upvote the best material for every exam.",
-    accent: "from-indigo-500/20 to-transparent",
+    accent: "from-orange-500/15 to-transparent",
     advanced: true,
   },
   {
@@ -130,7 +130,7 @@ export const FEATURES: Feature[] = [
     tagline: "Your exam, perfectly paced.",
     description:
       "An adaptive plan that decides what to study and when — built around your syllabus, your exam date and your real progress.",
-    accent: "from-violet-500/20 to-transparent",
+    accent: "from-amber-500/15 to-transparent",
     advanced: true,
   },
   {
@@ -139,7 +139,7 @@ export const FEATURES: Feature[] = [
     tagline: "Never forget important concepts.",
     description:
       "A spaced-repetition vault resurfaces the right concept at the right moment — so what you learn actually sticks.",
-    accent: "from-fuchsia-500/20 to-transparent",
+    accent: "from-amber-500/15 to-transparent",
     advanced: true,
   },
   {
@@ -148,7 +148,7 @@ export const FEATURES: Feature[] = [
     tagline: "Learn concepts deeply.",
     description:
       "Ask anything and get clear, grounded explanations that adapt to your level — from first principles to exam-ready depth.",
-    accent: "from-indigo-500/20 to-transparent",
+    accent: "from-orange-500/15 to-transparent",
   },
   {
     icon: Network,
@@ -156,7 +156,7 @@ export const FEATURES: Feature[] = [
     tagline: "Connect knowledge across resources.",
     description:
       "StudNexus links ideas across all your material, surfacing connections you'd never spot reading one file at a time.",
-    accent: "from-fuchsia-500/20 to-transparent",
+    accent: "from-amber-500/15 to-transparent",
   },
   {
     icon: Target,
@@ -164,7 +164,7 @@ export const FEATURES: Feature[] = [
     tagline: "Generate intelligent assessments.",
     description:
       "Turn any topic into targeted questions and mock tests calibrated to where you are and where you need to be.",
-    accent: "from-purple-500/20 to-transparent",
+    accent: "from-orange-500/15 to-transparent",
   },
   {
     icon: Layers3,
@@ -172,7 +172,7 @@ export const FEATURES: Feature[] = [
     tagline: "Active recall, automated.",
     description:
       "Auto-generate flashcards from your material and master them with spaced, self-graded recall sessions.",
-    accent: "from-purple-500/20 to-transparent",
+    accent: "from-orange-500/15 to-transparent",
   },
   {
     icon: LineChart,
@@ -180,7 +180,7 @@ export const FEATURES: Feature[] = [
     tagline: "Measure progress objectively.",
     description:
       "See mastery by topic, spot weak areas early, and watch real, measurable progress toward your goal.",
-    accent: "from-violet-500/20 to-transparent",
+    accent: "from-amber-500/15 to-transparent",
   },
 ];
 
@@ -194,14 +194,14 @@ export interface Category {
 }
 
 export const CATEGORIES: Category[] = [
-  { icon: CircuitBoard, title: "Engineering", blurb: "Core subjects, labs & semesters", glow: "rgba(124,58,237,0.35)" },
-  { icon: Stethoscope, title: "Medical", blurb: "NEET PG, high-volume retention", glow: "rgba(168,85,247,0.35)" },
-  { icon: Landmark, title: "UPSC", blurb: "Vast syllabus, made manageable", glow: "rgba(79,70,229,0.35)" },
-  { icon: Calculator, title: "CAT", blurb: "Quant, VARC & LRDI mastery", glow: "rgba(139,92,246,0.35)" },
-  { icon: Cpu, title: "GATE", blurb: "Concept depth + problem solving", glow: "rgba(124,58,237,0.35)" },
-  { icon: Building2, title: "State Exams", blurb: "Region-specific preparation", glow: "rgba(168,85,247,0.35)" },
-  { icon: BadgeCheck, title: "Certifications", blurb: "Professional & upskilling tracks", glow: "rgba(79,70,229,0.35)" },
-  { icon: GraduationCap, title: "University", blurb: "Coursework, projects & exams", glow: "rgba(139,92,246,0.35)" },
+  { icon: CircuitBoard, title: "Engineering", blurb: "Core subjects, labs & semesters", glow: "rgba(236,139,13,0.35)" },
+  { icon: Stethoscope, title: "Medical", blurb: "NEET PG, high-volume retention", glow: "rgba(245,166,35,0.35)" },
+  { icon: Landmark, title: "UPSC", blurb: "Vast syllabus, made manageable", glow: "rgba(217,119,6,0.35)" },
+  { icon: Calculator, title: "CAT", blurb: "Quant, VARC & LRDI mastery", glow: "rgba(245,166,35,0.35)" },
+  { icon: Cpu, title: "GATE", blurb: "Concept depth + problem solving", glow: "rgba(236,139,13,0.35)" },
+  { icon: Building2, title: "State Exams", blurb: "Region-specific preparation", glow: "rgba(245,166,35,0.35)" },
+  { icon: BadgeCheck, title: "Certifications", blurb: "Professional & upskilling tracks", glow: "rgba(217,119,6,0.35)" },
+  { icon: GraduationCap, title: "University", blurb: "Coursework, projects & exams", glow: "rgba(245,166,35,0.35)" },
 ];
 
 /* ------------------------------ How it works ---------------------------- */

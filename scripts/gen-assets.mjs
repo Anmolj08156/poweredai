@@ -17,8 +17,8 @@ const markSvg = (size = 512) => `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7c3aed"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
   </defs>
   <rect x="16" y="16" width="480" height="480" rx="116" fill="url(#g)"/>
@@ -33,20 +33,20 @@ const ogSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b0b12"/>
-      <stop offset="100%" stop-color="#09090b"/>
+      <stop offset="0%" stop-color="#1a130c"/>
+      <stop offset="100%" stop-color="#181009"/>
     </linearGradient>
     <radialGradient id="glow" cx="78%" cy="22%" r="55%">
-      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ec8b0d" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ec8b0d" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#a855f7"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
     <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#c4b5fd"/>
-      <stop offset="100%" stop-color="#a855f7"/>
+      <stop offset="0%" stop-color="#f9bb60"/>
+      <stop offset="100%" stop-color="#f5a623"/>
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
@@ -59,10 +59,10 @@ const ogSvg = `
     <circle cx="35" cy="35" r="8" fill="#fff"/>
     <circle cx="85" cy="92" r="8" fill="#fff"/>
   </g>
-  <text x="240" y="232" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700"><tspan fill="#ffffff">Stud</tspan><tspan fill="url(#brand)">Nexus</tspan></text>
+  <text x="240" y="234" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="700"><tspan fill="#ffffff">Stud</tspan><tspan fill="url(#brand)">Nexus</tspan></text>
 
-  <text x="96" y="356" font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="700" fill="#f4f4f5">The AI-Powered</text>
-  <text x="96" y="430" font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="700" fill="url(#brand)">Learning Operating System</text>
+  <text x="96" y="358" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" fill="#f4f4f5">The AI-Powered</text>
+  <text x="96" y="436" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" fill="url(#brand)">Learning Operating System</text>
 
   <text x="96" y="510" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#a1a1aa">Organize notes · Chat with PDFs · Generate quizzes · Plan &amp; revise</text>
   <text x="96" y="566" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#71717a">studnexus.com · a DataSmith Research Labs product</text>

@@ -33,15 +33,15 @@
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #09090b;
+    background: #181009;
   }
   ::-webkit-scrollbar-thumb {
-    background: #27272a;
+    background: #392a1c;
     border-radius: 9999px;
-    border: 2px solid #09090b;
+    border: 2px solid #181009;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #3f3f46;
+    background: #4d3925;
   }
 
   :focus-visible {
@@ -83,7 +83,7 @@
     @apply bg-gradient-to-br from-white via-white to-zinc-400 bg-clip-text text-transparent;
   }
   .text-gradient-brand {
-    background-image: linear-gradient(120deg, #c4b5fd 0%, #a855f7 40%, #7c3aed 100%);
+    background-image: linear-gradient(120deg, #f9bb60 0%, #f5a623 40%, #ec8b0d 100%);
     @apply bg-clip-text text-transparent;
   }
 
@@ -98,7 +98,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.6), rgba(79, 70, 229, 0.1) 40%, transparent 70%);
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.6), rgba(217, 119, 6, 0.12) 40%, transparent 70%);
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -112,15 +112,15 @@
   }
   .btn-primary {
     @apply btn text-white;
-    background-image: linear-gradient(180deg, #8b4ef0, #7c3aed);
+    background-image: linear-gradient(180deg, #f5a623, #ec8b0d);
     box-shadow:
-      0 1px 0 0 rgba(255, 255, 255, 0.18) inset,
-      0 10px 30px -10px rgba(124, 58, 237, 0.7);
+      0 1px 0 0 rgba(255, 255, 255, 0.22) inset,
+      0 10px 30px -10px rgba(236, 139, 13, 0.7);
   }
   .btn-primary:hover {
     box-shadow:
-      0 1px 0 0 rgba(255, 255, 255, 0.25) inset,
-      0 14px 40px -10px rgba(124, 58, 237, 0.9);
+      0 1px 0 0 rgba(255, 255, 255, 0.3) inset,
+      0 14px 40px -10px rgba(236, 139, 13, 0.9);
     transform: translateY(-1px);
   }
   .btn-ghost {

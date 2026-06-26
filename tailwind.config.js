@@ -16,29 +16,29 @@ export default {
     },
     extend: {
       colors: {
-        // Brand system
+        // Brand system — warm amber / orange
         brand: {
-          50: "#f5f3ff",
-          100: "#ede9fe",
-          200: "#ddd6fe",
-          300: "#c4b5fd",
-          400: "#a855f7", // accent
-          500: "#7c3aed", // primary
-          600: "#6d28d9",
-          700: "#5b21b6",
-          800: "#4c1d95",
-          900: "#2e1065",
+          50: "#fff8ec",
+          100: "#ffeccd",
+          200: "#fcd497",
+          300: "#f9bb60",
+          400: "#f5a623", // accent
+          500: "#ec8b0d", // primary
+          600: "#c66f0a", // hover / deeper
+          700: "#9d540c",
+          800: "#7e4310",
+          900: "#683912",
         },
         indigo: {
-          accent: "#4f46e5", // secondary
+          accent: "#d97706", // secondary (warm amber)
         },
         ink: {
-          DEFAULT: "#09090b", // background
-          surface: "#0e0e11",
-          card: "#18181b", // cards
-          border: "#27272a",
-          muted: "#a1a1aa",
-          soft: "#71717a",
+          DEFAULT: "#181009", // background (espresso)
+          surface: "#1d140c",
+          card: "#241910", // cards
+          border: "#392a1c",
+          muted: "#b7a78f",
+          soft: "#897763",
         },
       },
       fontFamily: {
@@ -53,12 +53,12 @@ export default {
           "sans-serif",
         ],
         display: [
-          "Geist",
-          "Inter var",
-          "Inter",
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
+          "Playfair Display",
+          "Georgia",
+          "ui-serif",
+          "Cambria",
+          "Times New Roman",
+          "serif",
         ],
         mono: ["Geist Mono", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
@@ -70,16 +70,16 @@ export default {
       },
       backgroundImage: {
         "grid-fade":
-          "linear-gradient(to bottom, transparent, #09090b 70%), radial-gradient(circle at center, rgba(124,58,237,0.08), transparent 60%)",
+          "linear-gradient(to bottom, transparent, #181009 70%), radial-gradient(circle at center, rgba(236,139,13,0.10), transparent 60%)",
         "brand-gradient":
-          "linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #a855f7 100%)",
+          "linear-gradient(135deg, #ec8b0d 0%, #d97706 50%, #f5a623 100%)",
         "radial-glow":
-          "radial-gradient(50% 50% at 50% 50%, rgba(124,58,237,0.35) 0%, rgba(124,58,237,0) 100%)",
+          "radial-gradient(50% 50% at 50% 50%, rgba(236,139,13,0.38) 0%, rgba(236,139,13,0) 100%)",
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(124,58,237,0.2), 0 8px 40px -12px rgba(124,58,237,0.45)",
-        "glow-lg": "0 0 80px -20px rgba(124,58,237,0.6)",
-        card: "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 24px 48px -24px rgba(0,0,0,0.8)",
+        glow: "0 0 0 1px rgba(236,139,13,0.22), 0 8px 40px -12px rgba(236,139,13,0.5)",
+        "glow-lg": "0 0 80px -20px rgba(236,139,13,0.6)",
+        card: "0 1px 0 0 rgba(255,255,255,0.05) inset, 0 24px 48px -24px rgba(0,0,0,0.8)",
       },
       keyframes: {
         "fade-up": {
