@@ -297,8 +297,8 @@ export const FOOTER_LINKS = [
     links: [
       { label: "DataSmith Research Labs", href: "https://datasmithlabs.com" },
       { label: "Contact", href: "mailto:anmol@datasmithlabs.com" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms", href: "#" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms & Conditions", href: "/terms" },
     ],
   },
 ] as const;

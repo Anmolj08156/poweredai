@@ -106,8 +106,8 @@ export function Footer() {
             © {year} {SITE.product} by {SITE.company}. All rights reserved. · {SITE.tagline}
           </p>
           <div className="flex items-center gap-5 text-xs text-ink-soft">
-            <a href="#" className="transition-colors hover:text-zinc-300">Privacy Policy</a>
-            <a href="#" className="transition-colors hover:text-zinc-300">Terms</a>
+            <Link to="/privacy" className="transition-colors hover:text-zinc-300">Privacy Policy</Link>
+            <Link to="/terms" className="transition-colors hover:text-zinc-300">Terms</Link>
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               All systems operational
