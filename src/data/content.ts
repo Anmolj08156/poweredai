@@ -32,10 +32,20 @@ import {
 
 export const NAV_LINKS = [
   { label: "Features", href: "#features" },
+  { label: "For Educators", href: "#audiences" },
   { label: "Explore", href: "#explore" },
-  { label: "For Everyone", href: "#categories" },
   { label: "How it works", href: "#how" },
   { label: "FAQ", href: "#faq" },
+] as const;
+
+/** Quick capability pills shown under the hero. */
+export const FEATURE_PILLS = [
+  "AI Study Workspace",
+  "Smart Notes",
+  "Quiz Generator",
+  "Flashcards",
+  "Knowledge Graph",
+  "And more…",
 ] as const;
 
 /* ------------------------------ Waitlist role --------------------------- */
@@ -204,6 +214,44 @@ export const CATEGORIES: Category[] = [
   { icon: GraduationCap, title: "University", blurb: "Coursework, projects & exams", glow: "rgba(245,166,35,0.35)" },
 ];
 
+/* ------------------------------- Audiences ------------------------------ */
+
+export interface Audience {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  ctaLabel: string;
+  href: string;
+  accent: string;
+}
+
+export const AUDIENCES: Audience[] = [
+  {
+    icon: GraduationCap,
+    title: "For Students",
+    description: "Study, practice and master any subject with an AI tutor that knows your material.",
+    ctaLabel: "Learn more",
+    href: "/what-is-studnexus",
+    accent: "from-amber-500/20 to-transparent",
+  },
+  {
+    icon: Users,
+    title: "For Educators",
+    description: "Create, share and promote your notes — build an audience and grow your community.",
+    ctaLabel: "Learn more",
+    href: "/community",
+    accent: "from-orange-500/20 to-transparent",
+  },
+  {
+    icon: Building2,
+    title: "For Universities",
+    description: "Empower your students and faculty with the future of learning, at institution scale.",
+    ctaLabel: "Talk to us",
+    href: "mailto:anmol@datasmithlabs.com",
+    accent: "from-amber-500/20 to-transparent",
+  },
+];
+
 /* ------------------------------ How it works ---------------------------- */
 
 export interface Step {
@@ -304,10 +352,10 @@ export const FOOTER_LINKS = [
 ] as const;
 
 export const SOCIAL_PROOF_LOGOS = [
-  "IIT Aspirants",
-  "AIIMS Track",
-  "UPSC 2026",
-  "IIM Bound",
-  "GATE CSE",
-  "State PSC",
+  "IIT Bombay",
+  "Delhi University",
+  "BITS Pilani",
+  "VIT University",
+  "IIT Delhi",
+  "And 100+ more",
 ] as const;

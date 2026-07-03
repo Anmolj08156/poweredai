@@ -7,7 +7,7 @@ export function LogoMarquee() {
     <section className="relative border-y border-white/[0.05] py-8">
       <div className="shell">
         <p className="mb-6 text-center text-xs font-medium uppercase tracking-[0.2em] text-ink-soft">
-          Trusted by ambitious learners preparing for
+          Trusted by students &amp; educators from
         </p>
         <div className="mask-fade-edges overflow-hidden">
           <div className="flex w-max animate-marquee items-center gap-12">

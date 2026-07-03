@@ -6,6 +6,7 @@ import { LogoMarquee } from "./components/LogoMarquee";
 import { Problem } from "./components/Problem";
 import { Solution } from "./components/Solution";
 import { Features } from "./components/Features";
+import { Audiences } from "./components/Audiences";
 import { ExplorePages } from "./components/ExplorePages";
 import { Categories } from "./components/Categories";
 import { HowItWorks } from "./components/HowItWorks";
@@ -33,13 +34,14 @@ export default function App() {
 
       <main>
         <Hero />
+        <Features />
+        <Audiences />
         <LogoMarquee />
+        <ExplorePages />
         <Problem />
         <Solution />
-        <Features />
-        <ExplorePages />
-        <Categories />
         <HowItWorks />
+        <Categories />
         <SocialProof />
         <EarlyAccessCTA />
         <FAQ />

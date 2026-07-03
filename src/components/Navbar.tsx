@@ -62,10 +62,10 @@ export function Navbar() {
               Book Demo
             </button>
             <button
-              onClick={() => handleAnchor("#top")}
+              onClick={() => handleAnchor("#early-access")}
               className="btn-primary group py-2.5"
             >
-              Join Early Access
+              Get Started
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
@@ -118,8 +118,8 @@ export function Navbar() {
                 >
                   Book Demo
                 </button>
-                <button onClick={() => handleAnchor("#top")} className="btn-primary w-full">
-                  Join Early Access
+                <button onClick={() => handleAnchor("#early-access")} className="btn-primary w-full">
+                  Get Started
                 </button>
               </div>
             </motion.nav>
