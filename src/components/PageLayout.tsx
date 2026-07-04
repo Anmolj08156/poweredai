@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Logo } from "./ui/Logo";
 import { AmbientBackground } from "./ui/AmbientBackground";
 import { Footer } from "./Footer";
+import { SITE } from "../lib/config";
 
 /** Lightweight chrome for content / SEO sub-pages. */
 export function PageLayout({ children }: { children: ReactNode }) {
@@ -17,10 +18,10 @@ export function PageLayout({ children }: { children: ReactNode }) {
             <Link to="/" aria-label="StudNexus home">
               <Logo />
             </Link>
-            <Link to="/#top" className="btn-primary group py-2.5">
-              Join Early Access
+            <a href={SITE.app} className="btn-primary group py-2.5">
+              Get Started
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </a>
           </div>
         </div>
       </header>

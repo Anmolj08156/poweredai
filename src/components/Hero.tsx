@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Sparkles, Star, ArrowRight } from "lucide-react";
 import { HeroVisual } from "./HeroVisual";
 import { FEATURE_PILLS } from "../data/content";
+import { SITE } from "../lib/config";
 import { scrollToId } from "../lib/utils";
 
 export function Hero() {
@@ -52,10 +53,10 @@ export function Hero() {
               className="mt-8"
             >
               <div className="flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
-                <button onClick={() => scrollToId("early-access")} className="btn-primary group w-full px-6 py-4 text-base sm:w-auto">
+                <a href={SITE.app} className="btn-primary group w-full px-6 py-4 text-base sm:w-auto">
                   Start Free
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </button>
+                </a>
                 <button onClick={() => scrollToId("features")} className="btn-ghost w-full px-6 py-4 text-base sm:w-auto">
                   Explore Features
                 </button>

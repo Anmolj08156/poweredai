@@ -1,12 +1,9 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
-import { WaitlistForm } from "./ui/WaitlistForm";
+import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { SITE } from "../lib/config";
+import { openDemoModal } from "./DemoModal";
 
-const PERKS = [
-  "Free during the entire beta",
-  "Shape the roadmap with us",
-  "Priority onboarding & support",
-];
+const PERKS = ["Free to start", "No credit card needed", "AI-powered & private"];
 
 export function EarlyAccessCTA() {
   return (
@@ -27,18 +24,28 @@ export function EarlyAccessCTA() {
           <div className="relative mx-auto max-w-2xl text-center">
             <span className="eyebrow mx-auto">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
-              Limited early access
+              Start in seconds
             </span>
             <h2 className="mt-5 font-display text-balance text-3xl font-bold tracking-tight text-gradient sm:text-5xl">
-              Be among the first
+              Ready to learn smarter?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-pretty text-base text-ink-muted sm:text-lg">
-              Join the waitlist today — whether you're here to learn or to share what you know — and
-              get early access to the Learning Operating System.
+              Bring your notes, PDFs and syllabus into one AI workspace — and start understanding
+              more in less time. It's free to get going.
             </p>
 
-            <div className="mx-auto mt-8 max-w-xl">
-              <WaitlistForm withName size="lg" ctaLabel="Claim Early Access" source="cta" />
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a href={SITE.app} className="btn-primary group w-full px-6 py-4 text-base sm:w-auto">
+                Get Started Free
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <button
+                onClick={openDemoModal}
+                className="btn-ghost w-full px-6 py-4 text-base sm:w-auto"
+              >
+                <Sparkles className="h-4 w-4 text-brand-400" />
+                Book a Demo
+              </button>
             </div>
 
             <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">

@@ -8,6 +8,9 @@ export const SITE = {
   tagline: "One Platform. Every Learner.",
   url: import.meta.env.VITE_SITE_URL || "https://studnexus.com",
 
+  /** The live product app (sign up / log in / use StudNexus). */
+  app: import.meta.env.VITE_APP_URL || "https://app.studnexus.com",
+
   company: "DataSmith Research Labs",
   companyUrl: "https://datasmithlabs.com",
 

@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { PageLayout } from "../components/PageLayout";
-import { WaitlistForm } from "../components/ui/WaitlistForm";
 import { SITE } from "../lib/config";
 import { getSeoPage, SEO_PAGES, type SeoPage as SeoPageType } from "../data/seoPages";
 
@@ -71,10 +70,10 @@ export default function SeoPage({ slug }: { slug: string }) {
           <p className="mt-5 text-pretty text-lg leading-relaxed text-ink-muted">{page.intro}</p>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link to="/#top" className="btn-primary group">
-              Join Early Access
+            <a href={SITE.app} className="btn-primary group">
+              Get Started Free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </a>
             <Link to="/what-is-studnexus" className="btn-ghost">
               What is StudNexus?
             </Link>
@@ -122,13 +121,14 @@ export default function SeoPage({ slug }: { slug: string }) {
           {/* Sidebar */}
           <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
             <div className="surface p-6">
-              <h2 className="text-base font-semibold text-white">Get early access</h2>
+              <h2 className="text-base font-semibold text-white">Start learning free</h2>
               <p className="mt-1.5 text-sm text-ink-muted">
-                Join the waitlist and be among the first on StudNexus.
+                Bring your material into StudNexus and get going in seconds.
               </p>
-              <div className="mt-4">
-                <WaitlistForm source={page.slug} />
-              </div>
+              <a href={SITE.app} className="btn-primary group mt-4 w-full">
+                Get Started
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
             </div>
 
             <div className="surface p-6">
@@ -165,8 +165,11 @@ export default function SeoPage({ slug }: { slug: string }) {
           <p className="mx-auto mt-3 max-w-xl text-ink-muted">
             StudNexus brings notes, PDFs, quizzes, planning and community into one AI workspace.
           </p>
-          <div className="mx-auto mt-6 max-w-md">
-            <WaitlistForm size="lg" source={`${page.slug}-cta`} />
+          <div className="mt-6">
+            <a href={SITE.app} className="btn-primary group px-6 py-4 text-base">
+              Get Started Free
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </a>
           </div>
         </section>
       </article>

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Logo } from "./ui/Logo";
 import { NAV_LINKS } from "../data/content";
-import { openDemoModal } from "./DemoModal";
+import { SITE } from "../lib/config";
 import { cn, scrollToId } from "../lib/utils";
 
 export function Navbar() {
@@ -58,16 +58,13 @@ export function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-2 md:flex">
-            <button onClick={openDemoModal} className="btn-ghost py-2.5">
-              Book Demo
-            </button>
-            <button
-              onClick={() => handleAnchor("#early-access")}
-              className="btn-primary group py-2.5"
-            >
+            <a href={SITE.app} className="btn-ghost py-2.5">
+              Log in
+            </a>
+            <a href={SITE.app} className="btn-primary group py-2.5">
               Get Started
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </button>
+            </a>
           </div>
 
           {/* Mobile toggle */}
@@ -109,18 +106,12 @@ export function Navbar() {
                 </button>
               ))}
               <div className="mt-2 grid gap-2">
-                <button
-                  onClick={() => {
-                    setOpen(false);
-                    openDemoModal();
-                  }}
-                  className="btn-ghost w-full"
-                >
-                  Book Demo
-                </button>
-                <button onClick={() => handleAnchor("#early-access")} className="btn-primary w-full">
+                <a href={SITE.app} className="btn-ghost w-full">
+                  Log in
+                </a>
+                <a href={SITE.app} className="btn-primary w-full">
                   Get Started
-                </button>
+                </a>
               </div>
             </motion.nav>
           </motion.div>
