@@ -193,7 +193,7 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
     let finalIsHtml = isHtml;
     if (signature) {
       const base = isHtml ? body : escapeHtml(body).replace(/\n/g, "<br>");
-      finalBody = base + signatureHtml(replyTo);
+      finalBody = base + signatureHtml();
       finalIsHtml = true;
     }
 
@@ -276,7 +276,7 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
                   <div className="flex items-center gap-4">
                     <label className="flex items-center gap-2 text-xs text-ink-soft">
                       <input type="checkbox" checked={signature} onChange={(e) => setSignature(e.target.checked)} className="accent-brand-500" />
-                      Anushka signature
+                      Signature
                     </label>
                     <label className="flex items-center gap-2 text-xs text-ink-soft">
                       <input type="checkbox" checked={isHtml} onChange={(e) => setIsHtml(e.target.checked)} className="accent-brand-500" />
@@ -428,20 +428,18 @@ function escapeHtml(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-/** Email-safe HTML signature with Anushka's photo (hosted at /anushka.png). */
-function signatureHtml(replyTo: string | null): string {
-  const email = replyTo || "anmol@datasmithlabs.com";
+/** Email-safe HTML signature (photo hosted at /anmol.png — replace with a real photo). */
+function signatureHtml(): string {
   const origin = typeof window !== "undefined" ? window.location.origin : "https://studnexus.com";
   return `
 <table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:28px;padding-top:16px;border-top:1px solid #eaeaea;font-family:Arial,Helvetica,sans-serif">
   <tr>
     <td style="padding-right:14px;vertical-align:middle">
-      <img src="${origin}/anushka.png" width="52" height="52" alt="Anushka" style="width:52px;height:52px;border-radius:9999px;display:block;object-fit:cover" />
+      <img src="${origin}/anmol.png" width="52" height="52" alt="Anmol" style="width:52px;height:52px;border-radius:9999px;display:block;object-fit:cover" />
     </td>
     <td style="vertical-align:middle">
-      <div style="font-size:15px;font-weight:bold;color:#1a1a1a">Anushka</div>
+      <div style="font-size:15px;font-weight:bold;color:#1a1a1a">Anmol</div>
       <div style="font-size:13px;color:#666">DataSmith Research Labs</div>
-      <div style="font-size:13px"><a href="mailto:${email}" style="color:#d97706;text-decoration:none">${email}</a></div>
     </td>
   </tr>
 </table>`;

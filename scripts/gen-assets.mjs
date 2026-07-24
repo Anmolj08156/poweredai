@@ -68,34 +68,18 @@ const ogSvg = `
   <text x="96" y="566" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#71717a">studnexus.com · a DataSmith Research Labs product</text>
 </svg>`;
 
-// Placeholder avatar for the "Anushka" mail signature (flat illustration).
-// Replace public/anushka.png with a real photo any time.
+// Clean monogram avatar for the mail signature (placeholder).
+// Replace public/anmol.png with a real photo any time.
 const avatarSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="ab" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#fcd497"/>
-      <stop offset="100%" stop-color="#ec8b0d"/>
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="256" fill="url(#ab)"/>
-  <path d="M136 250 C136 150 200 96 256 96 C312 96 376 150 376 250 C376 340 360 420 360 440 L152 440 C152 420 136 340 136 250 Z" fill="#3a2419"/>
-  <path d="M150 512 C150 420 195 384 256 384 C317 384 362 420 362 512 Z" fill="#6d4436"/>
-  <path d="M226 330 h60 v46 c0 20 -60 20 -60 0 Z" fill="#e8b489"/>
-  <ellipse cx="256" cy="238" rx="92" ry="104" fill="#f3c99e"/>
-  <circle cx="166" cy="244" r="16" fill="#f3c99e"/>
-  <circle cx="346" cy="244" r="16" fill="#f3c99e"/>
-  <path d="M164 232 C160 150 250 120 256 120 C262 120 352 150 348 232 C348 190 330 150 300 150 C300 175 280 188 256 188 C232 188 212 175 212 150 C182 150 164 190 164 232 Z" fill="#3a2419"/>
-  <path d="M206 214 q22 -12 44 -2" stroke="#3a2419" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <path d="M262 212 q22 -10 44 2" stroke="#3a2419" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <ellipse cx="224" cy="240" rx="11" ry="13" fill="#2a1c14"/>
-  <ellipse cx="288" cy="240" rx="11" ry="13" fill="#2a1c14"/>
-  <circle cx="227" cy="236" r="3.5" fill="#fff"/>
-  <circle cx="291" cy="236" r="3.5" fill="#fff"/>
-  <path d="M256 250 l-6 20 q6 6 12 0" stroke="#d9a67a" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <path d="M230 288 q26 24 52 0" stroke="#b5654a" stroke-width="7" fill="none" stroke-linecap="round"/>
-  <circle cx="200" cy="272" r="14" fill="#f0a074" opacity="0.45"/>
-  <circle cx="312" cy="272" r="14" fill="#f0a074" opacity="0.45"/>
+  <text x="256" y="356" font-family="Arial, Helvetica, sans-serif" font-size="280" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
 </svg>`;
 
 const out = (name) => path.join(PUBLIC, name);
@@ -107,7 +91,7 @@ const tasks = [
   sharp(Buffer.from(markSvg(180))).resize(180, 180).png().toFile(out("apple-touch-icon.png")),
   sharp(Buffer.from(markSvg(48))).resize(48, 48).png().toFile(out("favicon-48.png")),
   sharp(Buffer.from(ogSvg)).png().toFile(out("og-image.png")),
-  sharp(Buffer.from(avatarSvg)).resize(256, 256).png().toFile(out("anushka.png")),
+  sharp(Buffer.from(avatarSvg)).resize(256, 256).png().toFile(out("anmol.png")),
 ];
 
 await Promise.all(tasks);
