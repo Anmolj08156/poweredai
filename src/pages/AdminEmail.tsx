@@ -440,7 +440,7 @@ function signatureHtml(replyTo: string | null): string {
     </td>
     <td style="vertical-align:middle">
       <div style="font-size:15px;font-weight:bold;color:#1a1a1a">Anushka</div>
-      <div style="font-size:13px;color:#666">StudNexus — The AI Learning OS</div>
+      <div style="font-size:13px;color:#666">DataSmith Research Labs</div>
       <div style="font-size:13px"><a href="mailto:${email}" style="color:#d97706;text-decoration:none">${email}</a></div>
     </td>
   </tr>

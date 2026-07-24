@@ -20,7 +20,7 @@
     // sender (or under a verified domain). The display name ("Anushka") is what
     // recipients see. Replies go to SES_REPLY_TO.
     "SES_REGION": "us-east-1",
-    "SES_FROM": "Anushka from StudNexus <noreply@datasmithlabs.com>",
+    "SES_FROM": "Anushka from DataSmith Research Labs <anushka@datasmithlabs.com>",
     "SES_REPLY_TO": "anmol@datasmithlabs.com"
   }
 }
