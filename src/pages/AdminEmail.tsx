@@ -142,6 +142,7 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [isHtml, setIsHtml] = useState(false);
+  const [signature, setSignature] = useState(true);
   const [recipientsRaw, setRecipientsRaw] = useState("");
   const [attachment, setAttachment] = useState<{ filename: string; contentType: string; contentBase64: string; sizeKB: number } | null>(null);
   const [sending, setSending] = useState(false);
@@ -187,13 +188,22 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
     setDone(0);
     setAudit(recipients.map((email) => ({ email, status: "pending" as const })));
 
+    // Append the Anushka signature (forces HTML) if enabled.
+    let finalBody = body;
+    let finalIsHtml = isHtml;
+    if (signature) {
+      const base = isHtml ? body : escapeHtml(body).replace(/\n/g, "<br>");
+      finalBody = base + signatureHtml(replyTo);
+      finalIsHtml = true;
+    }
+
     const chunks = chunk(recipients, BATCH_SIZE);
     for (const group of chunks) {
       try {
         const res = await fetch("/api/send-email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password, subject, body, isHtml, recipients: group, attachment }),
+          body: JSON.stringify({ password, subject, body: finalBody, isHtml: finalIsHtml, recipients: group, attachment }),
         });
         const data = (await res.json()) as { results?: { email: string; ok: boolean; error?: string }[]; error?: string };
         if (!res.ok || !data.results) {
@@ -263,10 +273,16 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
 
                 <div className="mt-4 flex items-center justify-between">
                   <label className="text-xs font-medium text-ink-muted">Message</label>
-                  <label className="flex items-center gap-2 text-xs text-ink-soft">
-                    <input type="checkbox" checked={isHtml} onChange={(e) => setIsHtml(e.target.checked)} className="accent-brand-500" />
-                    HTML
-                  </label>
+                  <div className="flex items-center gap-4">
+                    <label className="flex items-center gap-2 text-xs text-ink-soft">
+                      <input type="checkbox" checked={signature} onChange={(e) => setSignature(e.target.checked)} className="accent-brand-500" />
+                      Anushka signature
+                    </label>
+                    <label className="flex items-center gap-2 text-xs text-ink-soft">
+                      <input type="checkbox" checked={isHtml} onChange={(e) => setIsHtml(e.target.checked)} className="accent-brand-500" />
+                      HTML
+                    </label>
+                  </div>
                 </div>
                 <textarea
                   value={body}
@@ -407,6 +423,29 @@ function Stat({ label, value, tone }: { label: string; value: number; tone: "eme
 }
 
 /* -------------------------------- helpers ------------------------------- */
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/** Email-safe HTML signature with Anushka's photo (hosted at /anushka.png). */
+function signatureHtml(replyTo: string | null): string {
+  const email = replyTo || "anmol@datasmithlabs.com";
+  const origin = typeof window !== "undefined" ? window.location.origin : "https://studnexus.com";
+  return `
+<table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:28px;padding-top:16px;border-top:1px solid #eaeaea;font-family:Arial,Helvetica,sans-serif">
+  <tr>
+    <td style="padding-right:14px;vertical-align:middle">
+      <img src="${origin}/anushka.png" width="52" height="52" alt="Anushka" style="width:52px;height:52px;border-radius:9999px;display:block;object-fit:cover" />
+    </td>
+    <td style="vertical-align:middle">
+      <div style="font-size:15px;font-weight:bold;color:#1a1a1a">Anushka</div>
+      <div style="font-size:13px;color:#666">StudNexus — The AI Learning OS</div>
+      <div style="font-size:13px"><a href="mailto:${email}" style="color:#d97706;text-decoration:none">${email}</a></div>
+    </td>
+  </tr>
+</table>`;
+}
 
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
