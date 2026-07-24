@@ -68,18 +68,32 @@ const ogSvg = `
   <text x="96" y="566" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#71717a">studnexus.com · a DataSmith Research Labs product</text>
 </svg>`;
 
-// Clean monogram avatar for the mail signature (placeholder).
+// Illustrated male avatar for the mail signature (placeholder).
 // Replace public/anmol.png with a real photo any time.
 const avatarSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="ab" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f5a623"/>
-      <stop offset="100%" stop-color="#d97706"/>
+      <stop offset="0%" stop-color="#fcd497"/>
+      <stop offset="100%" stop-color="#ec8b0d"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="256" fill="url(#ab)"/>
-  <text x="256" y="356" font-family="Arial, Helvetica, sans-serif" font-size="280" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+  <path d="M144 512 C144 414 196 376 256 376 C316 376 368 414 368 512 Z" fill="#33445c"/>
+  <path d="M236 380 L256 412 L276 380 Z" fill="#e8eef5"/>
+  <path d="M230 322 h52 v52 c0 18 -52 18 -52 0 Z" fill="#e3a877"/>
+  <path d="M168 236 C168 156 200 128 256 128 C312 128 344 156 344 236 C344 300 308 344 256 344 C204 344 168 300 168 236 Z" fill="#efb98c"/>
+  <circle cx="170" cy="248" r="15" fill="#efb98c"/>
+  <circle cx="342" cy="248" r="15" fill="#efb98c"/>
+  <path d="M166 226 C160 150 210 116 256 116 C302 116 352 150 346 226 C344 196 340 174 320 168 C316 188 292 198 256 198 C220 198 196 188 192 168 C172 174 168 196 166 226 Z" fill="#2a1c14"/>
+  <path d="M200 218 q24 -8 46 0" stroke="#2a1c14" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M266 218 q22 -8 46 0" stroke="#2a1c14" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <ellipse cx="222" cy="242" rx="10" ry="12" fill="#2a1c14"/>
+  <ellipse cx="290" cy="242" rx="10" ry="12" fill="#2a1c14"/>
+  <circle cx="225" cy="238" r="3" fill="#fff"/>
+  <circle cx="293" cy="238" r="3" fill="#fff"/>
+  <path d="M256 252 l-6 24 q6 6 12 0" stroke="#cf9068" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M228 296 q28 20 56 0" stroke="#a86545" stroke-width="7" fill="none" stroke-linecap="round"/>
 </svg>`;
 
 const out = (name) => path.join(PUBLIC, name);

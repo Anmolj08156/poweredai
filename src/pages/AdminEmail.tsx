@@ -434,12 +434,15 @@ function signatureHtml(): string {
   return `
 <table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:28px;padding-top:16px;border-top:1px solid #eaeaea;font-family:Arial,Helvetica,sans-serif">
   <tr>
-    <td style="padding-right:14px;vertical-align:middle">
-      <img src="${origin}/anmol.png" width="52" height="52" alt="Anmol" style="width:52px;height:52px;border-radius:9999px;display:block;object-fit:cover" />
+    <td style="padding-right:16px;vertical-align:top">
+      <img src="${origin}/anmol.png" width="64" height="64" alt="Anmol Jain" style="width:64px;height:64px;border-radius:9999px;display:block;object-fit:cover" />
     </td>
-    <td style="vertical-align:middle">
-      <div style="font-size:15px;font-weight:bold;color:#1a1a1a">Anmol</div>
-      <div style="font-size:13px;color:#666">DataSmith Research Labs</div>
+    <td style="vertical-align:top;line-height:1.5">
+      <div style="font-size:16px;font-weight:bold;color:#1a1a1a">Anmol Jain</div>
+      <div style="font-size:13px;color:#d97706;font-weight:bold">Founder</div>
+      <div style="font-size:13px;color:#444">DataSmith Research Labs</div>
+      <div style="font-size:13px"><a href="mailto:anmol@datasmithlabs.com" style="color:#d97706;text-decoration:none">anmol@datasmithlabs.com</a></div>
+      <div style="font-size:13px"><a href="tel:+917017283915" style="color:#444;text-decoration:none">+91 7017283915</a></div>
     </td>
   </tr>
 </table>`;
