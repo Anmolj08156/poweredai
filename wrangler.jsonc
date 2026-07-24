@@ -16,8 +16,11 @@
     "run_worker_first": ["/api/*"]
   },
   "vars": {
-    // Non-secret config. Change SES_FROM to YOUR verified SES sender.
+    // Non-secret config. The email address in SES_FROM must be a verified SES
+    // sender (or under a verified domain). The display name ("Anushka") is what
+    // recipients see. Replies go to SES_REPLY_TO.
     "SES_REGION": "us-east-1",
-    "SES_FROM": "StudNexus <noreply@datasmithlabs.com>"
+    "SES_FROM": "Anushka from StudNexus <noreply@datasmithlabs.com>",
+    "SES_REPLY_TO": "anmol@datasmithlabs.com"
   }
 }

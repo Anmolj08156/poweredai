@@ -41,16 +41,36 @@ export default function AdminEmail() {
   const [authed, setAuthed] = useState(false);
   const [password, setPassword] = useState("");
   const [fromAddr, setFromAddr] = useState<string | null>(null);
+  const [replyTo, setReplyTo] = useState<string | null>(null);
 
   if (!authed) {
-    return <Gate onUnlock={(pw, from) => { setPassword(pw); setFromAddr(from); setAuthed(true); }} />;
+    return (
+      <Gate
+        onUnlock={(pw, from, reply) => {
+          setPassword(pw);
+          setFromAddr(from);
+          setReplyTo(reply);
+          setAuthed(true);
+        }}
+      />
+    );
   }
-  return <Mailer password={password} fromAddr={fromAddr} onLogout={() => { setPassword(""); setAuthed(false); }} />;
+  return (
+    <Mailer
+      password={password}
+      fromAddr={fromAddr}
+      replyTo={replyTo}
+      onLogout={() => {
+        setPassword("");
+        setAuthed(false);
+      }}
+    />
+  );
 }
 
 /* --------------------------------- Gate --------------------------------- */
 
-function Gate({ onUnlock }: { onUnlock: (pw: string, from: string | null) => void }) {
+function Gate({ onUnlock }: { onUnlock: (pw: string, from: string | null, replyTo: string | null) => void }) {
   const [value, setValue] = useState("");
   const [status, setStatus] = useState<"idle" | "checking" | "error">("idle");
   const [msg, setMsg] = useState("");
@@ -65,9 +85,9 @@ function Gate({ onUnlock }: { onUnlock: (pw: string, from: string | null) => voi
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: value }),
       });
-      const data = (await res.json()) as { ok?: boolean; from?: string | null };
+      const data = (await res.json()) as { ok?: boolean; from?: string | null; replyTo?: string | null };
       if (data.ok) {
-        onUnlock(value, data.from ?? null);
+        onUnlock(value, data.from ?? null, data.replyTo ?? null);
       } else {
         setStatus("error");
         setMsg("Incorrect password.");
@@ -118,7 +138,7 @@ function Gate({ onUnlock }: { onUnlock: (pw: string, from: string | null) => voi
 
 /* -------------------------------- Mailer -------------------------------- */
 
-function Mailer({ password, fromAddr, onLogout }: { password: string; fromAddr: string | null; onLogout: () => void }) {
+function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; fromAddr: string | null; replyTo: string | null; onLogout: () => void }) {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [isHtml, setIsHtml] = useState(false);
@@ -215,7 +235,10 @@ function Mailer({ password, fromAddr, onLogout }: { password: string; fromAddr: 
               <Logo showWordmark={false} />
               <div>
                 <h1 className="text-sm font-semibold text-white">Bulk Mailer</h1>
-                <p className="text-xs text-ink-soft">From: {fromAddr || "(server SES_FROM)"}</p>
+                <p className="text-xs text-ink-soft">
+                  From: {fromAddr || "(server SES_FROM)"}
+                  {replyTo && <span> · Reply-To: {replyTo}</span>}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2">

@@ -22,6 +22,7 @@ interface Env {
   SES_SECRET_ACCESS_KEY?: string;
   SES_REGION?: string;
   SES_FROM?: string;
+  SES_REPLY_TO?: string;
 }
 
 interface Attachment {
@@ -60,7 +61,11 @@ function authed(env: Env, password?: string): boolean {
 
 async function handleCheck(request: Request, env: Env): Promise<Response> {
   const body = (await request.json().catch(() => ({}))) as { password?: string };
-  return json({ ok: authed(env, body.password), from: env.SES_FROM || null });
+  return json({
+    ok: authed(env, body.password),
+    from: env.SES_FROM || null,
+    replyTo: env.SES_REPLY_TO || null,
+  });
 }
 
 async function handleSend(request: Request, env: Env): Promise<Response> {
@@ -95,6 +100,7 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
         content: body.body || "",
         isHtml: Boolean(body.isHtml),
         attachment: body.attachment || null,
+        replyTo: env.SES_REPLY_TO || "",
       });
       results.push({ email: to, ...r });
     } catch (e) {
@@ -111,13 +117,14 @@ async function sendOne(
   aws: AwsClient,
   region: string,
   from: string,
-  msg: { to: string; subject: string; content: string; isHtml: boolean; attachment: Attachment | null }
+  msg: { to: string; subject: string; content: string; isHtml: boolean; attachment: Attachment | null; replyTo: string }
 ): Promise<{ ok: boolean; messageId?: string; error?: string }> {
   const endpoint = `https://email.${region}.amazonaws.com/v2/email/outbound-emails`;
+  const replyTo = msg.replyTo?.trim();
 
-  let payload: unknown;
+  let payload: Record<string, unknown>;
   if (msg.attachment) {
-    const mime = buildRawMime(from, msg.to, msg.subject, msg.content, msg.isHtml, msg.attachment);
+    const mime = buildRawMime(from, msg.to, msg.subject, msg.content, msg.isHtml, msg.attachment, replyTo);
     payload = {
       FromEmailAddress: from,
       Destination: { ToAddresses: [msg.to] },
@@ -132,6 +139,7 @@ async function sendOne(
       Destination: { ToAddresses: [msg.to] },
       Content: { Simple: { Subject: { Data: msg.subject, Charset: "UTF-8" }, Body: bodyContent } },
     };
+    if (replyTo) payload.ReplyToAddresses = [replyTo];
   }
 
   const res = await aws.fetch(endpoint, {
@@ -187,7 +195,8 @@ function buildRawMime(
   subject: string,
   content: string,
   isHtml: boolean,
-  att: Attachment
+  att: Attachment,
+  replyTo?: string
 ): string {
   const boundary = "b_" + Math.random().toString(36).slice(2);
   const ctype = isHtml ? "text/html" : "text/plain";
@@ -195,6 +204,7 @@ function buildRawMime(
   return [
     `From: ${from}`,
     `To: ${to}`,
+    ...(replyTo ? [`Reply-To: ${replyTo}`] : []),
     `Subject: ${encodeHeaderWord(subject)}`,
     "MIME-Version: 1.0",
     `Content-Type: multipart/mixed; boundary="${boundary}"`,
