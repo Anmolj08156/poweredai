@@ -197,7 +197,12 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
       finalIsHtml = true;
     }
 
-    const chunks = chunk(recipients, BATCH_SIZE);
+    // Big attachments blow the Worker's memory/time limit, so shrink the batch
+    // as the attachment grows. No attachment → full batches.
+    const attKB = attachment ? attachment.sizeKB : 0;
+    const batchSize = attKB === 0 ? BATCH_SIZE : attKB <= 200 ? 8 : attKB <= 800 ? 3 : 1;
+
+    const chunks = chunk(recipients, batchSize);
     for (const group of chunks) {
       try {
         const res = await fetch("/api/send-email", {
@@ -205,11 +210,15 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ password, subject, body: finalBody, isHtml: finalIsHtml, recipients: group, attachment }),
         });
-        const data = (await res.json()) as { results?: { email: string; ok: boolean; error?: string }[]; error?: string };
-        if (!res.ok || !data.results) {
-          const err = data.error || `HTTP ${res.status}`;
-          setAudit((prev) => prev.map((r) => (group.includes(r.email) ? { ...r, status: "failed", detail: err } : r)));
-        } else {
+        const text = await res.text();
+        let data: { results?: { email: string; ok: boolean; error?: string }[]; error?: string } | null = null;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = null; // non-JSON (e.g. a Cloudflare/HTML error page)
+        }
+
+        if (res.ok && data && Array.isArray(data.results)) {
           const map = new Map(data.results.map((r) => [r.email, r]));
           setAudit((prev) =>
             prev.map((r) => {
@@ -218,6 +227,13 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
               return { email: r.email, status: hit.ok ? "sent" : "failed", detail: hit.ok ? undefined : hit.error };
             })
           );
+        } else {
+          const err = data?.error
+            ? data.error
+            : res.ok
+              ? "Server overloaded — attachment too large for this batch. Use a smaller file (or link it instead)."
+              : `HTTP ${res.status}`;
+          setAudit((prev) => prev.map((r) => (group.includes(r.email) ? { ...r, status: "failed", detail: err } : r)));
         }
       } catch (e) {
         setAudit((prev) => prev.map((r) => (group.includes(r.email) ? { ...r, status: "failed", detail: String(e) } : r)));
