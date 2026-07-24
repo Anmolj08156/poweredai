@@ -1,5 +1,7 @@
 # StudNexus — robots.txt
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 Sitemap: https://studnexus.com/sitemap.xml

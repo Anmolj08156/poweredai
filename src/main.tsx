@@ -6,6 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import SeoPage from "./pages/SeoPage";
 import LegalPage from "./pages/LegalPage";
+import AdminEmail from "./pages/AdminEmail";
 import NotFound from "./pages/NotFound";
 import { initAnalytics } from "./lib/analytics";
 import "./index.css";
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/community" element={<SeoPage slug="community" />} />
           <Route path="/privacy" element={<LegalPage slug="privacy" />} />
           <Route path="/terms" element={<LegalPage slug="terms" />} />
+          <Route path="/admin/email" element={<AdminEmail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

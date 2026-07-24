@@ -1,13 +1,23 @@
 {
-  // Cloudflare Workers static-assets deployment for the StudNexus SPA.
-  // The build (`npm run build`) outputs to ./dist, which is served directly as
-  // static assets — no Worker script, no Vite plugin, no Vite 6 requirement.
+  // Cloudflare Worker + static assets for StudNexus.
+  // The Worker (worker/index.ts) serves the built SPA via the ASSETS binding
+  // and exposes /api/* for the admin bulk-email tool. AWS SES credentials are
+  // Worker SECRETS (set via `wrangler secret put`), never committed here.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "poweredai",
+  "main": "worker/index.ts",
   "compatibility_date": "2025-06-01",
   "assets": {
     "directory": "./dist",
-    // Serve index.html for unknown paths so client-side routing (404 page, etc.) works.
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    // Serve index.html for unknown non-asset, non-/api paths (client-side routing).
+    "not_found_handling": "single-page-application",
+    // Always route API calls through the Worker (never to the SPA fallback).
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    // Non-secret config. Change SES_FROM to YOUR verified SES sender.
+    "SES_REGION": "us-east-1",
+    "SES_FROM": "StudNexus <noreply@datasmithlabs.com>"
   }
 }
