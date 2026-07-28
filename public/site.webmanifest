@@ -4,8 +4,8 @@
   "description": "One Platform. Every Learner. The AI-powered Learning Operating System.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#181009",
-  "theme_color": "#181009",
+  "background_color": "#0e0b08",
+  "theme_color": "#0e0b08",
   "icons": [
     {
       "src": "/favicon.svg",

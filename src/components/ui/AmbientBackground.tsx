@@ -1,5 +1,5 @@
 /**
- * Fixed, page-wide ambient backdrop: aurora glows + grid + noise.
+ * Fixed, page-wide ambient backdrop: a restrained warm glow + subtle grid.
  * Purely decorative, pointer-events disabled, GPU-friendly.
  */
 export function AmbientBackground() {
@@ -8,16 +8,15 @@ export function AmbientBackground() {
       {/* Base */}
       <div className="absolute inset-0 bg-ink" />
 
-      {/* Grid */}
-      <div className="absolute inset-0 bg-grid opacity-[0.5] [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_75%)]" />
+      {/* Subtle grid, fading out near the top only */}
+      <div className="absolute inset-0 bg-grid opacity-[0.22] [mask-image:radial-gradient(ellipse_at_top,black_10%,transparent_60%)]" />
 
-      {/* Aurora blobs */}
-      <div className="absolute -top-40 left-1/2 h-[42rem] w-[42rem] -translate-x-1/2 rounded-full bg-brand-600/25 blur-[120px] animate-aurora" />
-      <div className="absolute top-[20%] -left-40 h-[34rem] w-[34rem] rounded-full bg-indigo-accent/20 blur-[120px] animate-float-slow" />
-      <div className="absolute top-[55%] -right-40 h-[36rem] w-[36rem] rounded-full bg-brand-400/15 blur-[130px] animate-aurora [animation-delay:-6s]" />
+      {/* One soft warm glow behind the hero — restrained, not a wash */}
+      <div className="absolute -top-48 left-1/2 h-[36rem] w-[52rem] -translate-x-1/2 rounded-full bg-brand-600/10 blur-[150px]" />
+      <div className="absolute top-[40%] -right-52 h-[30rem] w-[30rem] rounded-full bg-brand-500/[0.06] blur-[150px]" />
 
-      {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(24,16,9,0.7)_100%)]" />
+      {/* Vignette to keep edges calm */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(10,8,6,0.75)_100%)]" />
     </div>
   );
 }

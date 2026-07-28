@@ -33,12 +33,12 @@ export default {
           accent: "#d97706", // secondary (warm amber)
         },
         ink: {
-          DEFAULT: "#181009", // background (espresso)
-          surface: "#1d140c",
-          card: "#241910", // cards
-          border: "#392a1c",
-          muted: "#b7a78f",
-          soft: "#897763",
+          DEFAULT: "#0e0b08", // background (deep, clean warm-dark)
+          surface: "#15110d",
+          card: "#181410", // cards
+          border: "#2a241d",
+          muted: "#a9a091",
+          soft: "#7b7264",
         },
       },
       fontFamily: {
@@ -71,16 +71,16 @@ export default {
       },
       backgroundImage: {
         "grid-fade":
-          "linear-gradient(to bottom, transparent, #181009 70%), radial-gradient(circle at center, rgba(236,139,13,0.10), transparent 60%)",
+          "linear-gradient(to bottom, transparent, #0e0b08 70%), radial-gradient(circle at center, rgba(236,139,13,0.05), transparent 60%)",
         "brand-gradient":
           "linear-gradient(135deg, #ec8b0d 0%, #d97706 50%, #f5a623 100%)",
         "radial-glow":
-          "radial-gradient(50% 50% at 50% 50%, rgba(236,139,13,0.38) 0%, rgba(236,139,13,0) 100%)",
+          "radial-gradient(50% 50% at 50% 50%, rgba(236,139,13,0.24) 0%, rgba(236,139,13,0) 100%)",
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(236,139,13,0.22), 0 8px 40px -12px rgba(236,139,13,0.5)",
-        "glow-lg": "0 0 80px -20px rgba(236,139,13,0.6)",
-        card: "0 1px 0 0 rgba(255,255,255,0.05) inset, 0 24px 48px -24px rgba(0,0,0,0.8)",
+        glow: "0 0 0 1px rgba(236,139,13,0.14), 0 8px 28px -14px rgba(236,139,13,0.35)",
+        "glow-lg": "0 0 60px -26px rgba(236,139,13,0.42)",
+        card: "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 20px 44px -28px rgba(0,0,0,0.85)",
       },
       keyframes: {
         "fade-up": {

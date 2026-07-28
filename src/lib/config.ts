@@ -17,8 +17,8 @@ export const SITE = {
   email: "anmol@datasmithlabs.com",
 
   social: {
-    twitter: "https://twitter.com/datasmithlabs",
-    linkedin: "https://www.linkedin.com/company/datasmithlabs",
+    instagram: "https://www.instagram.com/studnexus/",
+    linkedin: "https://www.linkedin.com/company/studnexus/",
   },
 } as const;
 

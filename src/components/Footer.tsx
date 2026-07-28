@@ -1,4 +1,4 @@
-import { Mail, Twitter, Linkedin, ArrowUpRight } from "lucide-react";
+import { Mail, Instagram, Linkedin, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Logo } from "./ui/Logo";
 import { FOOTER_LINKS } from "../data/content";
@@ -32,7 +32,7 @@ export function Footer() {
             </a>
             <div className="mt-5 flex items-center gap-2">
               {[
-                { icon: Twitter, label: "Twitter", href: SITE.social.twitter },
+                { icon: Instagram, label: "Instagram", href: SITE.social.instagram },
                 { icon: Linkedin, label: "LinkedIn", href: SITE.social.linkedin },
               ].map((s) => (
                 <a
