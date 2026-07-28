@@ -41,3 +41,7 @@ Thumbs.db
 # Misc
 .cache
 coverage
+
+# Source brand image (generated assets are committed in public/ instead)
+WhatsApp Image*
+brand-logo-src.*

@@ -1,75 +1,63 @@
 /**
- * Generates brand raster assets into /public from the StudNexus mark.
+ * Generates brand raster assets into /public from the StudNexus logo.
  *   node scripts/gen-assets.mjs
  *
- * Outputs: logo.png, icon-192.png, icon-512.png, apple-touch-icon.png,
- *          favicon-48.png, og-image.png
+ * SOURCE: brand-logo-src.jpg (copy of the master logo, gitignored).
+ * Outputs: logo.png, icon-192/512.png, apple-touch-icon.png, favicon-*.png,
+ *          og-image.png, and the anmol.png mail avatar.
  */
 import sharp from "sharp";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import fs from "node:fs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PUBLIC = path.resolve(__dirname, "../public");
+const ROOT = path.resolve(__dirname, "..");
+const PUBLIC = path.resolve(ROOT, "public");
+const out = (name) => path.join(PUBLIC, name);
 
-// Square brand mark (gradient rounded square + "N" constellation).
-const markSvg = (size = 512) => `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f5a623"/>
-      <stop offset="100%" stop-color="#d97706"/>
-    </linearGradient>
-  </defs>
-  <rect x="16" y="16" width="480" height="480" rx="116" fill="url(#g)"/>
-  <path d="M150 372V140l212 232V140" fill="none" stroke="#ffffff" stroke-width="38"
-        stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="150" cy="140" r="34" fill="#ffffff"/>
-  <circle cx="362" cy="372" r="34" fill="#ffffff"/>
-</svg>`;
+// Prefer the stable copy; fall back to the original WhatsApp filename.
+function findSource() {
+  const stable = path.join(ROOT, "brand-logo-src.jpg");
+  if (fs.existsSync(stable)) return stable;
+  const match = fs.readdirSync(ROOT).find((f) => /^WhatsApp Image.*\.(jpe?g|png)$/i.test(f));
+  if (match) return path.join(ROOT, match);
+  throw new Error("Logo source not found (brand-logo-src.jpg or WhatsApp Image*).");
+}
+const SOURCE = findSource();
 
-// Social / Open Graph card (1200x630).
-const ogSvg = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1a130c"/>
-      <stop offset="100%" stop-color="#181009"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="78%" cy="22%" r="55%">
-      <stop offset="0%" stop-color="#ec8b0d" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#ec8b0d" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f5a623"/>
-      <stop offset="100%" stop-color="#d97706"/>
-    </linearGradient>
-    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#f9bb60"/>
-      <stop offset="100%" stop-color="#f5a623"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
+// Center-crop to trim the dark padding around the mark.
+async function cropBox() {
+  const meta = await sharp(SOURCE).metadata();
+  const size = Math.min(meta.width, meta.height);
+  const crop = Math.round(size * 0.8);
+  return {
+    left: Math.round((meta.width - crop) / 2),
+    top: Math.round((meta.height - crop) / 2),
+    width: crop,
+    height: crop,
+  };
+}
 
-  <!-- mark -->
-  <g transform="translate(96,150)">
-    <rect width="120" height="120" rx="30" fill="url(#mark)"/>
-    <path d="M35 92V35l50 54V35" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="35" cy="35" r="8" fill="#fff"/>
-    <circle cx="85" cy="92" r="8" fill="#fff"/>
-  </g>
-  <text x="240" y="234" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="700"><tspan fill="#ffffff">Stud</tspan><tspan fill="url(#brand)">Nexus</tspan></text>
+async function squareLogo(size) {
+  const box = await cropBox();
+  return sharp(SOURCE).extract(box).resize(size, size, { fit: "cover" }).png().toBuffer();
+}
 
-  <text x="96" y="358" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" fill="#f4f4f5">The AI-Powered</text>
-  <text x="96" y="436" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" fill="url(#brand)">Learning Operating System</text>
+async function roundedLogo(size, radius) {
+  const box = await cropBox();
+  const mask = Buffer.from(
+    `<svg width="${size}" height="${size}"><rect width="${size}" height="${size}" rx="${radius}" fill="#fff"/></svg>`
+  );
+  return sharp(SOURCE)
+    .extract(box)
+    .resize(size, size, { fit: "cover" })
+    .composite([{ input: mask, blend: "dest-in" }])
+    .png()
+    .toBuffer();
+}
 
-  <text x="96" y="510" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#a1a1aa">Organize notes · Chat with PDFs · Generate quizzes · Plan &amp; revise</text>
-  <text x="96" y="566" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#71717a">studnexus.com · a DataSmith Research Labs product</text>
-</svg>`;
-
-// Illustrated male avatar for the mail signature (placeholder).
-// Replace public/anmol.png with a real photo any time.
+// Male illustrated avatar for the mail signature (unchanged placeholder).
 const avatarSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
@@ -96,17 +84,49 @@ const avatarSvg = `
   <path d="M228 296 q28 20 56 0" stroke="#a86545" stroke-width="7" fill="none" stroke-linecap="round"/>
 </svg>`;
 
-const out = (name) => path.join(PUBLIC, name);
+// Open Graph / social card background (logo is composited on top).
+const ogBgSvg = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#120d09"/>
+      <stop offset="100%" stop-color="#0e0b08"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="22%" r="55%">
+      <stop offset="0%" stop-color="#ec8b0d" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ec8b0d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f9bb60"/>
+      <stop offset="100%" stop-color="#f5a623"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <text x="266" y="234" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="700"><tspan fill="#ffffff">Stud</tspan><tspan fill="url(#brand)">Nexus</tspan></text>
+  <text x="96" y="360" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" fill="#f4f4f5">The AI-Powered</text>
+  <text x="96" y="438" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" fill="url(#brand)">Learning Operating System</text>
+  <text x="96" y="512" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#a1a1aa">Organize notes · Chat with PDFs · Generate quizzes · Plan &amp; revise</text>
+  <text x="96" y="568" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#71717a">studnexus.com · a DataSmith Research Labs product</text>
+</svg>`;
 
-const tasks = [
-  sharp(Buffer.from(markSvg(512))).png().toFile(out("logo.png")),
-  sharp(Buffer.from(markSvg(512))).resize(512, 512).png().toFile(out("icon-512.png")),
-  sharp(Buffer.from(markSvg(192))).resize(192, 192).png().toFile(out("icon-192.png")),
-  sharp(Buffer.from(markSvg(180))).resize(180, 180).png().toFile(out("apple-touch-icon.png")),
-  sharp(Buffer.from(markSvg(48))).resize(48, 48).png().toFile(out("favicon-48.png")),
-  sharp(Buffer.from(ogSvg)).png().toFile(out("og-image.png")),
-  sharp(Buffer.from(avatarSvg)).resize(256, 256).png().toFile(out("anmol.png")),
-];
+async function main() {
+  await sharp(await squareLogo(512)).toFile(out("logo.png"));
+  await sharp(await squareLogo(512)).toFile(out("icon-512.png"));
+  await sharp(await squareLogo(192)).toFile(out("icon-192.png"));
+  await sharp(await roundedLogo(180, 40)).toFile(out("apple-touch-icon.png"));
+  await sharp(await squareLogo(96)).toFile(out("favicon-96.png"));
+  await sharp(await squareLogo(48)).toFile(out("favicon-48.png"));
 
-await Promise.all(tasks);
-console.log("Generated: logo.png, icon-512.png, icon-192.png, apple-touch-icon.png, favicon-48.png, og-image.png");
+  await sharp(Buffer.from(avatarSvg)).resize(256, 256).png().toFile(out("anmol.png"));
+
+  const logoTile = await roundedLogo(128, 30);
+  await sharp(Buffer.from(ogBgSvg))
+    .composite([{ input: logoTile, top: 150, left: 96 }])
+    .png()
+    .toFile(out("og-image.png"));
+
+  console.log(`Generated brand assets from: ${path.basename(SOURCE)}`);
+}
+
+main();
