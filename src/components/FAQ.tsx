@@ -17,21 +17,21 @@ export function FAQ() {
       />
 
       <div className="mx-auto mt-12 max-w-3xl">
-        <div className="divide-y divide-white/[0.06] overflow-hidden rounded-2xl border border-ink-border bg-ink-card">
+        <div className="divide-y divide-ink-border overflow-hidden rounded-2xl border border-ink-border bg-ink-card">
           {FAQS.map((item, i) => {
             const isOpen = open === i;
             return (
               <div key={item.q}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.02] sm:px-6"
+                  className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-white sm:px-6"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-base font-medium text-white sm:text-lg">{item.q}</span>
+                  <span className="text-base font-medium text-neutral-900 sm:text-lg">{item.q}</span>
                   <span
                     className={cn(
-                      "grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/10 text-ink-muted transition-all duration-300",
-                      isOpen && "rotate-45 border-brand-400/40 bg-brand-500/10 text-brand-300"
+                      "grid h-7 w-7 shrink-0 place-items-center rounded-full border border-ink-border text-ink-muted transition-all duration-300",
+                      isOpen && "rotate-45 border-brand-400/40 bg-brand-500/10 text-brand-600"
                     )}
                   >
                     <Plus className="h-4 w-4" />

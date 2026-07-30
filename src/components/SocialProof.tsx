@@ -39,10 +39,10 @@ export function SocialProof() {
               variants={staggerItem}
               className="surface flex flex-col items-center gap-2 p-6 text-center"
             >
-              <div className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/[0.03] text-brand-300">
+              <div className="grid h-10 w-10 place-items-center rounded-lg border border-ink-border bg-white text-brand-600">
                 <Icon className="h-5 w-5" />
               </div>
-              <div className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              <div className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
                 <Counter value={m.value} suffix={m.suffix} />
               </div>
               <p className="text-xs text-ink-muted">{m.label}</p>
@@ -60,7 +60,7 @@ export function SocialProof() {
             className="surface flex flex-col p-6"
           >
             <Quote className="h-6 w-6 text-brand-400/60" />
-            <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-zinc-200">
+            <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-neutral-800">
               "{t.quote}"
             </blockquote>
             <figcaption className="mt-5 flex items-center gap-3">
@@ -68,7 +68,7 @@ export function SocialProof() {
                 {t.name.charAt(0)}
               </span>
               <span>
-                <span className="block text-sm font-semibold text-white">{t.name}</span>
+                <span className="block text-sm font-semibold text-neutral-900">{t.name}</span>
                 <span className="block text-xs text-ink-soft">{t.role}</span>
               </span>
             </figcaption>

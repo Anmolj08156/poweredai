@@ -4,7 +4,7 @@ import { SOCIAL_PROOF_LOGOS } from "../data/content";
 export function LogoMarquee() {
   const items = [...SOCIAL_PROOF_LOGOS, ...SOCIAL_PROOF_LOGOS];
   return (
-    <section className="relative border-y border-white/[0.05] py-8">
+    <section className="relative border-y border-ink-border py-8">
       <div className="shell">
         <p className="mb-6 text-center text-xs font-medium uppercase tracking-[0.2em] text-ink-soft">
           Trusted by students &amp; educators from
@@ -14,7 +14,7 @@ export function LogoMarquee() {
             {items.map((label, i) => (
               <span
                 key={i}
-                className="whitespace-nowrap text-lg font-semibold tracking-tight text-zinc-500 transition-colors hover:text-zinc-300"
+                className="whitespace-nowrap text-lg font-semibold tracking-tight text-neutral-400 transition-colors hover:text-neutral-700"
               >
                 {label}
               </span>

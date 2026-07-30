@@ -92,14 +92,14 @@ export function WaitlistForm({
                   "group relative flex flex-col items-start gap-0.5 rounded-xl border px-3 py-2 text-left transition-all",
                   active
                     ? "border-brand-400/60 bg-brand-500/15"
-                    : "border-white/10 bg-white/[0.02] hover:border-white/20"
+                    : "border-ink-border bg-white hover:border-neutral-300"
                 )}
               >
                 <span className="flex w-full items-center justify-between">
-                  <span className={cn("text-sm font-semibold", active ? "text-white" : "text-zinc-200")}>
+                  <span className={cn("text-sm font-semibold", active ? "text-neutral-900" : "text-neutral-800")}>
                     {r.label}
                   </span>
-                  {active && <Check className="h-3.5 w-3.5 shrink-0 text-brand-300" />}
+                  {active && <Check className="h-3.5 w-3.5 shrink-0 text-brand-600" />}
                 </span>
                 <span className="hidden text-[11px] leading-tight text-ink-soft sm:block">{r.hint}</span>
               </button>
@@ -231,7 +231,7 @@ function Field({
       autoComplete={autoComplete}
       onChange={(e) => onChange(e.target.value)}
       className={cn(
-        "w-full rounded-xl border border-white/10 bg-white/[0.03] text-zinc-100 placeholder:text-ink-soft",
+        "w-full rounded-xl border border-ink-border bg-white text-neutral-900 placeholder:text-ink-soft",
         "transition-colors focus:border-brand-400/60 focus:bg-white/[0.05]",
         large ? "px-5 py-4 text-base" : "px-4 py-3 text-sm",
         className

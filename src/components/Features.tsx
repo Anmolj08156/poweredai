@@ -28,7 +28,7 @@ export function Features() {
               key={feature.title}
               variants={staggerItem}
               className={cn(
-                "group surface relative flex flex-col overflow-hidden p-6 transition-all duration-300 hover:border-white/20",
+                "group surface relative flex flex-col overflow-hidden p-6 transition-all duration-300 hover:border-neutral-300",
                 wide && "lg:col-span-2 lg:flex-row lg:items-center lg:gap-8 lg:p-8",
                 feature.advanced && "border-brand-400/30 bg-brand-500/[0.04]"
               )}
@@ -42,7 +42,7 @@ export function Features() {
               />
 
               {feature.advanced && (
-                <span className="absolute right-4 top-4 z-10 inline-flex items-center gap-1 rounded-full border border-brand-400/30 bg-brand-500/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-200">
+                <span className="absolute right-4 top-4 z-10 inline-flex items-center gap-1 rounded-full border border-brand-400/30 bg-brand-500/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-700">
                   <Sparkles className="h-3 w-3" />
                   Advanced
                 </span>
@@ -52,15 +52,15 @@ export function Features() {
                 <div className="flex items-center gap-3">
                   <div
                     className={cn(
-                      "grid h-12 w-12 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-brand-300 transition-colors group-hover:text-brand-200",
+                      "grid h-12 w-12 place-items-center rounded-xl border border-ink-border bg-neutral-50 text-brand-600 transition-colors group-hover:text-brand-700",
                       feature.advanced && "border-brand-400/30 bg-brand-500/15"
                     )}
                   >
                     <Icon className="h-6 w-6" />
                   </div>
-                  <span className="text-sm font-medium text-brand-300/90">{feature.tagline}</span>
+                  <span className="text-sm font-medium text-brand-600/90">{feature.tagline}</span>
                 </div>
-                <h3 className="mt-5 text-xl font-semibold text-white">{feature.title}</h3>
+                <h3 className="mt-5 text-xl font-semibold text-neutral-900">{feature.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">{feature.description}</p>
               </div>
 
@@ -100,14 +100,14 @@ function FeatureMiniViz() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 + i * 0.12 }}
-            className="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2"
+            className="flex items-center gap-3 rounded-lg border border-ink-border bg-white px-3 py-2"
           >
-            <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-brand-500/15 text-[10px] font-bold text-brand-300">
+            <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-brand-500/15 text-[10px] font-bold text-brand-600">
               PDF
             </div>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-xs text-zinc-200">{r.label}</p>
-              <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-white/[0.06]">
+              <p className="truncate text-xs text-neutral-800">{r.label}</p>
+              <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-neutral-100">
                 <motion.div
                   className="h-full rounded-full bg-gradient-to-r from-brand-500 to-indigo-accent"
                   initial={{ width: 0 }}
@@ -117,7 +117,7 @@ function FeatureMiniViz() {
                 />
               </div>
             </div>
-            <span className="shrink-0 rounded-full bg-brand-500/10 px-2 py-0.5 text-[10px] font-medium text-brand-200">
+            <span className="shrink-0 rounded-full bg-brand-500/10 px-2 py-0.5 text-[10px] font-medium text-brand-700">
               {r.chip}
             </span>
           </motion.div>

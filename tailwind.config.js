@@ -32,13 +32,19 @@ export default {
         indigo: {
           accent: "#d97706", // secondary (warm amber)
         },
+        // Light "paper" theme
         ink: {
-          DEFAULT: "#0e0b08", // background (deep, clean warm-dark)
-          surface: "#15110d",
-          card: "#181410", // cards
-          border: "#2a241d",
-          muted: "#a9a091",
-          soft: "#7b7264",
+          DEFAULT: "#f7f3ec", // page background (warm cream)
+          surface: "#fdfbf7", // raised surface
+          card: "#ffffff", // cards
+          border: "#ece5d9", // subtle warm border
+          muted: "#6b6459", // muted text
+          soft: "#9c9487", // softer text
+        },
+        night: {
+          DEFAULT: "#0f0e0c", // for dark section bands
+          card: "#1a1815",
+          border: "#2a2723",
         },
       },
       fontFamily: {
@@ -71,16 +77,16 @@ export default {
       },
       backgroundImage: {
         "grid-fade":
-          "linear-gradient(to bottom, transparent, #0e0b08 70%), radial-gradient(circle at center, rgba(236,139,13,0.05), transparent 60%)",
+          "radial-gradient(60% 50% at 85% 0%, rgba(245,166,35,0.10), transparent 60%)",
         "brand-gradient":
           "linear-gradient(135deg, #ec8b0d 0%, #d97706 50%, #f5a623 100%)",
         "radial-glow":
-          "radial-gradient(50% 50% at 50% 50%, rgba(236,139,13,0.24) 0%, rgba(236,139,13,0) 100%)",
+          "radial-gradient(50% 50% at 50% 50%, rgba(245,166,35,0.18) 0%, rgba(245,166,35,0) 100%)",
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(236,139,13,0.14), 0 8px 28px -14px rgba(236,139,13,0.35)",
-        "glow-lg": "0 0 60px -26px rgba(236,139,13,0.42)",
-        card: "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 20px 44px -28px rgba(0,0,0,0.85)",
+        glow: "0 6px 20px -8px rgba(236,139,13,0.35)",
+        "glow-lg": "0 20px 50px -20px rgba(236,139,13,0.35)",
+        card: "0 1px 2px rgba(17,12,8,0.04), 0 14px 34px -18px rgba(17,12,8,0.14)",
       },
       keyframes: {
         "fade-up": {

@@ -111,7 +111,7 @@ export function DemoModal() {
             <button
               onClick={resetAndClose}
               aria-label="Close"
-              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-lg border border-white/10 text-ink-muted transition-colors hover:text-white"
+              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-lg border border-ink-border text-ink-muted transition-colors hover:text-neutral-900"
             >
               <X className="h-4 w-4" />
             </button>
@@ -125,7 +125,7 @@ export function DemoModal() {
                     <CalendarClock className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-semibold text-white">Book a demo</h2>
+                    <h2 className="text-lg font-semibold text-neutral-900">Book a demo</h2>
                     <p className="text-xs text-ink-muted">A 1:1 walkthrough of StudNexus — pick a time that suits you.</p>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export function DemoModal() {
 }
 
 const inputCls =
-  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-100 placeholder:text-ink-soft transition-colors focus:border-brand-400/60 focus:bg-white/[0.05]";
+  "w-full rounded-xl border border-ink-border bg-white px-4 py-3 text-sm text-neutral-900 placeholder:text-ink-soft transition-colors focus:border-brand-400/60 focus:bg-white/[0.05]";
 
 function Field({
   label,
@@ -272,7 +272,7 @@ function SuccessView({
       <div className="grid h-14 w-14 place-items-center rounded-2xl bg-emerald-500/15 text-emerald-400">
         <CheckCircle2 className="h-7 w-7" />
       </div>
-      <h2 className="mt-5 text-xl font-semibold text-white">Demo requested 🎉</h2>
+      <h2 className="mt-5 text-xl font-semibold text-neutral-900">Demo requested 🎉</h2>
       <p className="mt-2 max-w-sm text-sm text-ink-muted">
         Thanks{name ? `, ${name.split(" ")[0]}` : ""}! We've noted your preferred slot
         {date ? ` for ${date}` : ""}

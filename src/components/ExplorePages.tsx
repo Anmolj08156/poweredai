@@ -35,17 +35,17 @@ export function ExplorePages() {
             <motion.div key={page.slug} variants={staggerItem}>
               <Link
                 to={`/${page.slug}`}
-                className="group surface relative flex h-full flex-col overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
+                className="group surface relative flex h-full flex-col overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-300"
               >
-                <ArrowUpRight className="absolute right-5 top-5 h-4 w-4 text-ink-soft transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-300" />
-                <div className="grid h-12 w-12 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-brand-300">
+                <ArrowUpRight className="absolute right-5 top-5 h-4 w-4 text-ink-soft transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-600" />
+                <div className="grid h-12 w-12 place-items-center rounded-xl border border-ink-border bg-neutral-50 text-brand-600">
                   <Icon className="h-6 w-6" />
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-white">{page.h1}</h3>
+                <h3 className="mt-5 text-lg font-semibold text-neutral-900">{page.h1}</h3>
                 <p className="mt-1.5 flex-1 text-sm leading-relaxed text-ink-muted">
                   {SUMMARY[page.slug]}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand-300">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600">
                   Learn more
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </span>

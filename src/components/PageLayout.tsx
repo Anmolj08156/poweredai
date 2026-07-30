@@ -14,7 +14,7 @@ export function PageLayout({ children }: { children: ReactNode }) {
 
       <header className="fixed inset-x-0 top-0 z-50">
         <div className="shell">
-          <div className="mt-3 flex items-center justify-between rounded-2xl border border-white/[0.07] bg-ink/70 px-4 py-2.5 shadow-card backdrop-blur-xl sm:px-5">
+          <div className="mt-3 flex items-center justify-between rounded-2xl border border-ink-border bg-ink/70 px-4 py-2.5 shadow-card backdrop-blur-xl sm:px-5">
             <Link to="/" aria-label="StudNexus home">
               <Logo />
             </Link>

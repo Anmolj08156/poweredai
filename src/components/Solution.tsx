@@ -33,9 +33,9 @@ export function Solution() {
                   <div
                     className={`grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${pillar.color} shadow-glow`}
                   >
-                    <Icon className="h-7 w-7 text-white" />
+                    <Icon className="h-7 w-7 text-neutral-900" />
                   </div>
-                  <span className="text-base font-semibold text-white">{pillar.label}</span>
+                  <span className="text-base font-semibold text-neutral-900">{pillar.label}</span>
                   <span className="text-xs text-ink-soft">Step {i + 1}</span>
                 </motion.div>
 

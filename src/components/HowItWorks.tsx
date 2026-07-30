@@ -42,14 +42,14 @@ export function HowItWorks() {
                 />
 
                 <div className="surface flex w-full items-start gap-4 p-5">
-                  <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-500/20 to-indigo-accent/10 text-brand-300">
+                  <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-500/20 to-indigo-accent/10 text-brand-600">
                     <Icon className="h-6 w-6" />
-                    <span className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full border border-white/10 bg-ink text-[11px] font-bold text-white">
+                    <span className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full border border-ink-border bg-ink text-[11px] font-bold text-neutral-900">
                       {i + 1}
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-white">{step.title}</h3>
+                    <h3 className="text-base font-semibold text-neutral-900">{step.title}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-ink-muted">{step.description}</p>
                   </div>
                 </div>

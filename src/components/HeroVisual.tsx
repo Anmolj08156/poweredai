@@ -1,189 +1,112 @@
-import { motion } from "framer-motion";
 import {
-  FileText,
+  Home,
   Sparkles,
-  Target,
+  FileText,
+  ListChecks,
   RefreshCw,
-  LineChart,
-  BrainCircuit,
+  Bookmark,
+  Search,
+  Bell,
+  Upload,
 } from "lucide-react";
+import { cn } from "../lib/utils";
 
-/**
- * The hero centrepiece: an abstract "learning ecosystem" — a central AI core
- * with orbiting knowledge nodes, animated connections and floating insight
- * cards. Intentionally NOT a product screenshot.
- */
-
-const NODES = [
-  { icon: FileText, label: "Resources", angle: -90, color: "#f5a623" },
-  { icon: Sparkles, label: "Understand", angle: -30, color: "#ec8b0d" },
-  { icon: Target, label: "Practice", angle: 30, color: "#d97706" },
-  { icon: LineChart, label: "Track", angle: 90, color: "#f0992e" },
-  { icon: RefreshCw, label: "Revise", angle: 150, color: "#f5a623" },
-  { icon: BrainCircuit, label: "Connect", angle: 210, color: "#c66f0a" },
-];
-
-const RADIUS = 38; // percentage of container
-
-function polar(angleDeg: number, r: number) {
-  const a = (angleDeg * Math.PI) / 180;
-  return { x: 50 + r * Math.cos(a), y: 50 + r * Math.sin(a) };
-}
-
+/** A polished, static product-dashboard mockup (not a real screenshot). */
 export function HeroVisual() {
+  const nav = [
+    { icon: Home, label: "Home", active: true },
+    { icon: Sparkles, label: "AI Workspace" },
+    { icon: FileText, label: "Notes" },
+    { icon: ListChecks, label: "Quizzes" },
+    { icon: RefreshCw, label: "Revision" },
+    { icon: Bookmark, label: "Bookmarks" },
+  ];
+
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[34rem]">
-      {/* Glow base */}
-      <div className="absolute inset-8 rounded-full bg-radial-glow blur-2xl" />
+    <div className="relative mx-auto w-full max-w-xl">
+      <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-brand-300/20 blur-3xl" />
 
-      {/* Orbit rings */}
-      <div className="absolute inset-0 grid place-items-center">
-        <div className="h-[78%] w-[78%] rounded-full border border-white/[0.06]" />
-        <div className="absolute h-[55%] w-[55%] rounded-full border border-white/[0.05]" />
-        <div className="absolute h-[30%] w-[30%] rounded-full border border-white/[0.04]" />
-      </div>
-
-      {/* Connection lines */}
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#ec8b0d" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#d97706" stopOpacity="0.05" />
-          </linearGradient>
-        </defs>
-        {NODES.map((n, i) => {
-          const p = polar(n.angle, RADIUS);
-          return (
-            <motion.line
-              key={i}
-              x1="50"
-              y1="50"
-              x2={p.x}
-              y2={p.y}
-              stroke="url(#line)"
-              strokeWidth="0.4"
-              strokeDasharray="1 1.5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              whileInView={{ pathLength: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3 + i * 0.1 }}
-            />
-          );
-        })}
-      </svg>
-
-      {/* Slowly rotating node layer */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-      >
-        {NODES.map((n, i) => {
-          const p = polar(n.angle, RADIUS);
-          const Icon = n.icon;
-          return (
-            <motion.div
-              key={n.label}
-              className="absolute"
-              style={{ left: `${p.x}%`, top: `${p.y}%`, transform: "translate(-50%, -50%)" }}
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 + i * 0.1, type: "spring", stiffness: 200, damping: 16 }}
-            >
-              {/* Counter-rotate so cards stay upright */}
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                className="flex flex-col items-center gap-1.5"
-              >
-                <div
-                  className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-ink-card/90 backdrop-blur-md"
-                  style={{ boxShadow: `0 0 24px -6px ${n.color}80` }}
-                >
-                  <Icon className="h-5 w-5" style={{ color: n.color }} />
-                </div>
-                <span className="whitespace-nowrap rounded-md bg-ink/60 px-1.5 py-0.5 text-[10px] font-medium text-ink-muted backdrop-blur">
-                  {n.label}
-                </span>
-              </motion.div>
-            </motion.div>
-          );
-        })}
-      </motion.div>
-
-      {/* Central core */}
-      <div className="absolute inset-0 grid place-items-center">
-        <motion.div
-          initial={{ scale: 0.6, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 160, damping: 14 }}
-          className="relative grid h-24 w-24 place-items-center rounded-3xl border border-white/15 bg-gradient-to-br from-brand-500 to-indigo-accent shadow-glow-lg"
-        >
-          {/* pulse rings */}
-          <span className="absolute inset-0 rounded-3xl border border-brand-400/40 animate-pulse-ring" />
-          <span className="absolute inset-0 rounded-3xl border border-brand-400/30 animate-pulse-ring [animation-delay:1.5s]" />
-          <BrainCircuit className="h-11 w-11 text-white" />
-        </motion.div>
-      </div>
-
-      {/* Floating insight cards */}
-      <FloatingCard
-        className="left-[-6%] top-[14%]"
-        delay={0.8}
-        title="Concept mastered"
-        sub="Thermodynamics · 92%"
-        tone="emerald"
-      />
-      <FloatingCard
-        className="right-[-4%] top-[30%]"
-        delay={1}
-        title="12 questions generated"
-        sub="Adaptive difficulty"
-        tone="violet"
-      />
-      <FloatingCard
-        className="bottom-[8%] left-[2%]"
-        delay={1.2}
-        title="Revision due today"
-        sub="6 cards · 4 min"
-        tone="indigo"
-      />
-    </div>
-  );
-}
-
-function FloatingCard({
-  className,
-  delay,
-  title,
-  sub,
-  tone,
-}: {
-  className?: string;
-  delay: number;
-  title: string;
-  sub: string;
-  tone: "emerald" | "violet" | "indigo";
-}) {
-  const dot =
-    tone === "emerald" ? "bg-emerald-400" : tone === "violet" ? "bg-brand-400" : "bg-brand-300";
-  return (
-    <motion.div
-      className={`absolute hidden sm:block ${className}`}
-      initial={{ opacity: 0, y: 14, scale: 0.9 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <div className="animate-float glass rounded-xl px-3.5 py-2.5 shadow-card" style={{ animationDelay: `${delay}s` }}>
-        <div className="flex items-center gap-2">
-          <span className={`h-2 w-2 rounded-full ${dot} shadow-[0_0_8px_currentColor]`} />
-          <p className="text-xs font-semibold text-white">{title}</p>
+      <div className="overflow-hidden rounded-2xl border border-ink-border bg-white shadow-[0_30px_60px_-30px_rgba(17,12,8,0.35)]">
+        {/* Top bar */}
+        <div className="flex items-center justify-between border-b border-ink-border px-4 py-2.5">
+          <div className="flex items-center gap-2">
+            <img src="/logo.png" alt="" className="h-6 w-6 rounded-md" />
+            <span className="text-sm font-semibold text-neutral-900">
+              Stud<span className="text-gradient-brand">Nexus</span>
+            </span>
+          </div>
+          <div className="flex items-center gap-3 text-ink-soft">
+            <Search className="h-4 w-4" />
+            <Bell className="h-4 w-4" />
+            <span className="h-7 w-7 rounded-full bg-gradient-to-br from-brand-400 to-brand-600" />
+          </div>
         </div>
-        <p className="mt-0.5 pl-4 text-[11px] text-ink-soft">{sub}</p>
+
+        <div className="flex">
+          {/* Sidebar */}
+          <nav className="hidden w-36 shrink-0 space-y-1 border-r border-ink-border p-2.5 sm:block">
+            {nav.map((n) => {
+              const Icon = n.icon;
+              return (
+                <div
+                  key={n.label}
+                  className={cn(
+                    "flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs font-medium",
+                    n.active ? "bg-brand-50 text-brand-700" : "text-ink-muted"
+                  )}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                  {n.label}
+                </div>
+              );
+            })}
+          </nav>
+
+          {/* Main */}
+          <div className="min-w-0 flex-1 p-4">
+            <h3 className="text-sm font-bold text-neutral-900">Good morning, Anmol 👋</h3>
+            <p className="text-[11px] text-ink-muted">What do you want to learn today?</p>
+
+            {/* Upload */}
+            <div className="mt-3 rounded-xl border border-dashed border-neutral-300 bg-neutral-50 py-5 text-center">
+              <Upload className="mx-auto h-4 w-4 text-brand-500" />
+              <p className="mt-1.5 text-[11px] font-medium text-neutral-700">
+                Drop your PDF here or click to upload
+              </p>
+              <p className="text-[10px] text-ink-soft">Supports PDF, PPT, DOCX, TXT</p>
+            </div>
+
+            {/* Cards */}
+            <div className="mt-3 grid grid-cols-2 gap-2.5">
+              <div className="rounded-xl border border-ink-border p-2.5">
+                <p className="text-[10px] font-medium text-ink-soft">Continue learning</p>
+                <div className="mt-1.5 flex items-center gap-1.5">
+                  <span className="grid h-5 w-5 place-items-center rounded bg-rose-100 text-[8px] font-bold text-rose-500">
+                    PDF
+                  </span>
+                  <span className="truncate text-[11px] font-semibold text-neutral-900">Thermodynamics.pdf</span>
+                </div>
+                <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-neutral-100">
+                  <div className="h-full w-[62%] rounded-full bg-gradient-to-r from-brand-400 to-brand-600" />
+                </div>
+                <button className="mt-2 w-full rounded-md bg-neutral-900 py-1 text-[10px] font-semibold text-white">
+                  Continue
+                </button>
+              </div>
+
+              <div className="rounded-xl border border-ink-border p-2.5">
+                <p className="text-[10px] font-medium text-ink-soft">Today's Goal</p>
+                <p className="mt-1.5 text-[11px] font-semibold text-neutral-900">Finish Thermodynamics</p>
+                <p className="mt-2 text-xl font-bold text-brand-600">82%</p>
+                <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-neutral-100">
+                  <div className="h-full w-[82%] rounded-full bg-gradient-to-r from-brand-400 to-brand-600" />
+                </div>
+                <p className="mt-1.5 text-[10px] text-ink-soft">You're doing great!</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -53,9 +53,9 @@ export default function SeoPage({ slug }: { slug: string }) {
       <article className="shell">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-1.5 text-xs text-ink-soft" aria-label="Breadcrumb">
-          <Link to="/" className="hover:text-zinc-300">Home</Link>
+          <Link to="/" className="hover:text-neutral-700">Home</Link>
           <span>/</span>
-          <span className="text-zinc-400">{page.h1}</span>
+          <span className="text-neutral-500">{page.h1}</span>
         </nav>
 
         {/* Header */}
@@ -85,15 +85,15 @@ export default function SeoPage({ slug }: { slug: string }) {
           <div className="max-w-3xl space-y-12">
             {page.sections.map((s) => (
               <section key={s.heading}>
-                <h2 className="text-2xl font-semibold tracking-tight text-white">{s.heading}</h2>
+                <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">{s.heading}</h2>
                 {s.body.map((p, i) => (
                   <p key={i} className="mt-3 text-pretty leading-relaxed text-ink-muted">{p}</p>
                 ))}
                 {s.bullets && (
                   <ul className="mt-4 space-y-2.5">
                     {s.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2.5 text-zinc-200">
-                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-500/15 text-brand-300">
+                      <li key={b} className="flex items-start gap-2.5 text-neutral-800">
+                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-500/15 text-brand-600">
                           <Check className="h-3 w-3" />
                         </span>
                         <span className="leading-relaxed">{b}</span>
@@ -106,11 +106,11 @@ export default function SeoPage({ slug }: { slug: string }) {
 
             {/* FAQ */}
             <section>
-              <h2 className="text-2xl font-semibold tracking-tight text-white">Frequently asked questions</h2>
-              <dl className="mt-5 divide-y divide-white/[0.06] overflow-hidden rounded-2xl border border-ink-border bg-ink-card">
+              <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">Frequently asked questions</h2>
+              <dl className="mt-5 divide-y divide-ink-border overflow-hidden rounded-2xl border border-ink-border bg-ink-card">
                 {page.faq.map((f) => (
                   <div key={f.q} className="p-5">
-                    <dt className="font-medium text-white">{f.q}</dt>
+                    <dt className="font-medium text-neutral-900">{f.q}</dt>
                     <dd className="mt-1.5 text-sm leading-relaxed text-ink-muted">{f.a}</dd>
                   </div>
                 ))}
@@ -121,7 +121,7 @@ export default function SeoPage({ slug }: { slug: string }) {
           {/* Sidebar */}
           <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
             <div className="surface p-6">
-              <h2 className="text-base font-semibold text-white">Start learning free</h2>
+              <h2 className="text-base font-semibold text-neutral-900">Start learning free</h2>
               <p className="mt-1.5 text-sm text-ink-muted">
                 Bring your material into StudNexus and get going in seconds.
               </p>
@@ -132,7 +132,7 @@ export default function SeoPage({ slug }: { slug: string }) {
             </div>
 
             <div className="surface p-6">
-              <h2 className="text-sm font-semibold text-white">Explore more</h2>
+              <h2 className="text-sm font-semibold text-neutral-900">Explore more</h2>
               <ul className="mt-3 space-y-2">
                 {page.related.map((rel) => {
                   const r = SEO_PAGES.find((p) => p.slug === rel) as SeoPageType | undefined;
@@ -141,7 +141,7 @@ export default function SeoPage({ slug }: { slug: string }) {
                     <li key={rel}>
                       <Link
                         to={`/${r.slug}`}
-                        className="group flex items-center justify-between gap-2 text-sm text-ink-muted transition-colors hover:text-white"
+                        className="group flex items-center justify-between gap-2 text-sm text-ink-muted transition-colors hover:text-neutral-900"
                       >
                         <span className="flex items-center gap-2">
                           <r.icon className="h-4 w-4 text-brand-400" />

@@ -110,7 +110,7 @@ function Gate({ onUnlock }: { onUnlock: (pw: string, from: string | null, replyT
           <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-indigo-accent shadow-glow">
             <ShieldCheck className="h-6 w-6 text-white" />
           </div>
-          <h1 className="mt-5 text-xl font-semibold text-white">Admin Mailer</h1>
+          <h1 className="mt-5 text-xl font-semibold text-neutral-900">Admin Mailer</h1>
           <p className="mt-1 text-sm text-ink-muted">Enter the admin password to continue.</p>
           <input
             type="password"
@@ -121,13 +121,13 @@ function Gate({ onUnlock }: { onUnlock: (pw: string, from: string | null, replyT
               setStatus("idle");
             }}
             placeholder="Password"
-            className="mt-5 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-ink-soft focus:border-brand-400/60"
+            className="mt-5 w-full rounded-xl border border-ink-border bg-white px-4 py-3 text-sm text-neutral-900 placeholder:text-ink-soft focus:border-brand-400/60"
           />
           {msg && <p className="mt-2 text-xs text-rose-400">{msg}</p>}
           <button type="submit" disabled={status === "checking"} className="btn-primary mt-4 w-full">
             {status === "checking" ? <Loader2 className="h-4 w-4 animate-spin" /> : "Unlock"}
           </button>
-          <Link to="/" className="mt-4 flex items-center justify-center gap-1.5 text-xs text-ink-soft hover:text-zinc-300">
+          <Link to="/" className="mt-4 flex items-center justify-center gap-1.5 text-xs text-ink-soft hover:text-neutral-700">
             <Home className="h-3.5 w-3.5" /> Back to site
           </Link>
         </form>
@@ -255,12 +255,12 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
       <AmbientBackground />
 
       <div className="min-h-screen">
-        <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-ink/70 backdrop-blur-xl">
+        <header className="sticky top-0 z-30 border-b border-ink-border bg-ink/70 backdrop-blur-xl">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
             <div className="flex items-center gap-3">
               <Logo showWordmark={false} />
               <div>
-                <h1 className="text-sm font-semibold text-white">Bulk Mailer</h1>
+                <h1 className="text-sm font-semibold text-neutral-900">Bulk Mailer</h1>
                 <p className="text-xs text-ink-soft">
                   From: {fromAddr || "(server SES_FROM)"}
                   {replyTo && <span> · Reply-To: {replyTo}</span>}
@@ -312,8 +312,8 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
                 <div className="mt-4">
                   <label className="mb-1.5 block text-xs font-medium text-ink-muted">Attachment (optional)</label>
                   {attachment ? (
-                    <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
-                      <span className="flex items-center gap-2 truncate text-sm text-zinc-200">
+                    <div className="flex items-center justify-between rounded-xl border border-ink-border bg-white px-3 py-2.5">
+                      <span className="flex items-center gap-2 truncate text-sm text-neutral-800">
                         <Paperclip className="h-4 w-4 text-brand-400" />
                         {attachment.filename} <span className="text-ink-soft">· {attachment.sizeKB} KB</span>
                       </span>
@@ -335,7 +335,7 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-medium text-ink-muted">Recipients</label>
                   <span className="text-xs text-ink-soft">
-                    <span className="font-semibold text-brand-300">{parsed.valid.length}</span> valid
+                    <span className="font-semibold text-brand-600">{parsed.valid.length}</span> valid
                     {parsed.invalid.length > 0 && <span className="text-rose-400"> · {parsed.invalid.length} invalid</span>}
                   </span>
                 </div>
@@ -374,11 +374,11 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
             <div className="lg:sticky lg:top-24 lg:self-start">
               <div className="surface p-5">
                 <div className="flex items-center justify-between">
-                  <h2 className="flex items-center gap-2 text-sm font-semibold text-white">
+                  <h2 className="flex items-center gap-2 text-sm font-semibold text-neutral-900">
                     <Users className="h-4 w-4 text-brand-400" /> Send audit
                   </h2>
                   {audit.length > 0 && (
-                    <button onClick={() => downloadAudit(audit)} className="inline-flex items-center gap-1.5 text-xs text-ink-muted hover:text-white">
+                    <button onClick={() => downloadAudit(audit)} className="inline-flex items-center gap-1.5 text-xs text-ink-muted hover:text-neutral-900">
                       <Download className="h-3.5 w-3.5" /> CSV
                     </button>
                   )}
@@ -400,7 +400,7 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
                     </div>
                   ) : (
                     audit.map((r) => (
-                      <div key={r.email} className="flex items-start gap-2.5 rounded-lg border border-white/[0.05] bg-white/[0.02] px-3 py-2">
+                      <div key={r.email} className="flex items-start gap-2.5 rounded-lg border border-ink-border bg-white px-3 py-2">
                         {r.status === "sent" ? (
                           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
                         ) : r.status === "failed" ? (
@@ -409,7 +409,7 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
                           <Loader2 className="mt-0.5 h-4 w-4 shrink-0 animate-spin text-ink-soft" />
                         )}
                         <div className="min-w-0 flex-1">
-                          <p className="truncate text-xs text-zinc-200">{r.email}</p>
+                          <p className="truncate text-xs text-neutral-800">{r.email}</p>
                           {r.detail && <p className="truncate text-[11px] text-rose-400">{r.detail}</p>}
                         </div>
                       </div>
@@ -426,12 +426,12 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
 }
 
 const inputCls =
-  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-ink-soft focus:border-brand-400/60";
+  "w-full rounded-xl border border-ink-border bg-white px-4 py-3 text-sm text-neutral-900 placeholder:text-ink-soft focus:border-brand-400/60";
 
 function Stat({ label, value, tone }: { label: string; value: number; tone: "emerald" | "rose" | "brand" }) {
-  const c = tone === "emerald" ? "text-emerald-300" : tone === "rose" ? "text-rose-300" : "text-brand-300";
+  const c = tone === "emerald" ? "text-emerald-300" : tone === "rose" ? "text-rose-300" : "text-brand-600";
   return (
-    <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] py-2">
+    <div className="rounded-lg border border-ink-border bg-white py-2">
       <p className={cn("text-lg font-semibold", c)}>{value}</p>
       <p className="text-[11px] text-ink-soft">{label}</p>
     </div>

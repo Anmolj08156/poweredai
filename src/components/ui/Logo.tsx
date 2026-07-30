@@ -14,10 +14,10 @@ export function Logo({ className, showWordmark = true }: LogoProps) {
         alt="StudNexus"
         width={36}
         height={36}
-        className="h-9 w-9 rounded-xl object-cover ring-1 ring-white/10"
+        className="h-9 w-9 rounded-xl object-cover ring-1 ring-neutral-200"
       />
       {showWordmark && (
-        <span className="text-[1.05rem] font-semibold tracking-tight text-white">
+        <span className="text-[1.05rem] font-semibold tracking-tight text-neutral-900">
           Stud<span className="text-gradient-brand">Nexus</span>
         </span>
       )}

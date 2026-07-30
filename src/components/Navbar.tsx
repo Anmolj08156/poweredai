@@ -37,7 +37,7 @@ export function Navbar() {
           className={cn(
             "mt-3 flex items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-300 sm:px-5",
             scrolled
-              ? "border border-white/[0.07] bg-ink/70 shadow-card backdrop-blur-xl"
+              ? "border border-ink-border bg-ink/70 shadow-card backdrop-blur-xl"
               : "border border-transparent bg-transparent"
           )}
         >
@@ -50,7 +50,7 @@ export function Navbar() {
               <button
                 key={link.href}
                 onClick={() => handleAnchor(link.href)}
-                className="rounded-lg px-3.5 py-2 text-sm font-medium text-ink-muted transition-colors hover:text-white"
+                className="rounded-lg px-3.5 py-2 text-sm font-medium text-ink-muted transition-colors hover:text-neutral-900"
               >
                 {link.label}
               </button>
@@ -69,7 +69,7 @@ export function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.03] text-zinc-200 md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-xl border border-ink-border bg-white text-neutral-800 md:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -94,13 +94,13 @@ export function Navbar() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.3 }}
-              className="relative mx-5 mt-20 flex flex-col gap-1 rounded-2xl border border-white/[0.08] bg-ink-card/90 p-4 shadow-card"
+              className="relative mx-5 mt-20 flex flex-col gap-1 rounded-2xl border border-ink-border bg-ink-card/90 p-4 shadow-card"
             >
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleAnchor(link.href)}
-                  className="rounded-xl px-4 py-3 text-left text-base font-medium text-zinc-200 hover:bg-white/[0.04]"
+                  className="rounded-xl px-4 py-3 text-left text-base font-medium text-neutral-800 hover:bg-neutral-50"
                 >
                   {link.label}
                 </button>

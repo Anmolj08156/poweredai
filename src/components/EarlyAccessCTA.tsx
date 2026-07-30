@@ -50,7 +50,7 @@ export function EarlyAccessCTA() {
 
             <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               {PERKS.map((perk) => (
-                <li key={perk} className="flex items-center gap-2 text-sm text-zinc-300">
+                <li key={perk} className="flex items-center gap-2 text-sm text-neutral-700">
                   <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald-500/15 text-emerald-400">
                     <Check className="h-3 w-3" />
                   </span>

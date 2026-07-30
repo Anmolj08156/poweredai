@@ -16,7 +16,7 @@ export default function NotFound() {
         <div className="text-center">
           <Logo className="mx-auto" />
           <p className="mt-10 text-7xl font-semibold text-gradient-brand">404</p>
-          <h1 className="mt-4 text-2xl font-semibold text-white">This page wandered off.</h1>
+          <h1 className="mt-4 text-2xl font-semibold text-neutral-900">This page wandered off.</h1>
           <p className="mx-auto mt-2 max-w-sm text-sm text-ink-muted">
             The page you're looking for doesn't exist or has moved. Let's get you back on track.
           </p>

@@ -12,7 +12,7 @@ function Bullet({ text }: { text: string }) {
   const [, lead, delim, rest] = m;
   return (
     <>
-      <span className="font-semibold text-zinc-100">{lead.trim()}</span>
+      <span className="font-semibold text-neutral-900">{lead.trim()}</span>
       {delim === ":" ? ": " : " — "}
       {rest}
     </>
@@ -51,9 +51,9 @@ export default function LegalPage({ slug }: { slug: "privacy" | "terms" }) {
 
       <article className="shell max-w-3xl">
         <nav className="mb-6 flex items-center gap-1.5 text-xs text-ink-soft" aria-label="Breadcrumb">
-          <Link to="/" className="hover:text-zinc-300">Home</Link>
+          <Link to="/" className="hover:text-neutral-700">Home</Link>
           <span>/</span>
-          <span className="text-zinc-400">{doc.title}</span>
+          <span className="text-neutral-500">{doc.title}</span>
         </nav>
 
         <header>
@@ -71,7 +71,7 @@ export default function LegalPage({ slug }: { slug: "privacy" | "terms" }) {
         <div className="mt-12 space-y-10">
           {doc.sections.map((section) => (
             <section key={section.heading}>
-              <h2 className="text-xl font-semibold tracking-tight text-white">{section.heading}</h2>
+              <h2 className="text-xl font-semibold tracking-tight text-neutral-900">{section.heading}</h2>
               {section.blocks.map((block, i) => (
                 <Block key={i} block={block} />
               ))}
@@ -82,7 +82,7 @@ export default function LegalPage({ slug }: { slug: "privacy" | "terms" }) {
         {/* Contact */}
         <div className="surface mt-12 flex flex-col gap-3 p-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-base font-semibold text-white">Questions or requests?</h2>
+            <h2 className="text-base font-semibold text-neutral-900">Questions or requests?</h2>
             <p className="mt-1 text-sm text-ink-muted">
               Contact us for any privacy, data or account requests.
             </p>
@@ -94,7 +94,7 @@ export default function LegalPage({ slug }: { slug: "privacy" | "terms" }) {
         </div>
 
         {/* Disclaimer */}
-        <p className="mb-20 mt-8 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-xs leading-relaxed text-ink-soft">
+        <p className="mb-20 mt-8 rounded-xl border border-ink-border bg-white px-4 py-3 text-xs leading-relaxed text-ink-soft">
           {doc.note}
         </p>
       </article>
