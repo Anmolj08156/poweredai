@@ -70,7 +70,7 @@ export default function SeoPage({ slug }: { slug: string }) {
           <p className="mt-5 text-pretty text-lg leading-relaxed text-ink-muted">{page.intro}</p>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <a href={SITE.app} className="btn-primary group">
+            <a href={SITE.appSignup} className="btn-primary group">
               Get Started Free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
@@ -125,7 +125,7 @@ export default function SeoPage({ slug }: { slug: string }) {
               <p className="mt-1.5 text-sm text-ink-muted">
                 Bring your material into StudNexus and get going in seconds.
               </p>
-              <a href={SITE.app} className="btn-primary group mt-4 w-full">
+              <a href={SITE.appSignup} className="btn-primary group mt-4 w-full">
                 Get Started
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
@@ -166,7 +166,7 @@ export default function SeoPage({ slug }: { slug: string }) {
             StudNexus brings notes, PDFs, quizzes, planning and community into one AI workspace.
           </p>
           <div className="mt-6">
-            <a href={SITE.app} className="btn-primary group px-6 py-4 text-base">
+            <a href={SITE.appSignup} className="btn-primary group px-6 py-4 text-base">
               Get Started Free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>

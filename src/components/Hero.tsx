@@ -52,7 +52,7 @@ export function Hero() {
               className="mt-8"
             >
               <div className="flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
-                <a href={SITE.app} className="btn-primary group w-full px-6 py-4 text-base sm:w-auto">
+                <a href={SITE.appSignup} className="btn-primary group w-full px-6 py-4 text-base sm:w-auto">
                   Start for free
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </a>

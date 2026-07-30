@@ -3,13 +3,17 @@
  * Single source of truth for company info, contact and integrations.
  */
 
+const APP_URL = import.meta.env.VITE_APP_URL || "https://app.studnexus.com";
+
 export const SITE = {
   product: "StudNexus",
   tagline: "One Platform. Every Learner.",
   url: import.meta.env.VITE_SITE_URL || "https://studnexus.com",
 
-  /** The live product app (sign up / log in / use StudNexus). */
-  app: import.meta.env.VITE_APP_URL || "https://app.studnexus.com",
+  /** The live product app — deep-linked so CTAs skip the app's own landing. */
+  app: APP_URL,
+  appLogin: `${APP_URL}/login`,
+  appSignup: `${APP_URL}/signup`,
 
   company: "DataSmith Research Labs",
   companyUrl: "https://datasmithlabs.com",
