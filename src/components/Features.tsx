@@ -9,13 +9,13 @@ export function Features() {
   return (
     <Section id="features">
       <SectionHeading
-        eyebrow={<>Features</>}
+        eyebrow={<>The platform</>}
         title={
           <>
-            Everything you need to learn, <span className="text-gradient-brand">all in one place</span>
+            All your learning. <span className="text-gradient-brand">One intelligent platform.</span>
           </>
         }
-        description="From PDFs to practice, StudNexus turns your study material into interactive learning experiences."
+        description="Upload, understand, practice and master — without switching tabs."
       />
 
       <StaggerGroup className="mt-14 grid auto-rows-[1fr] gap-4 sm:grid-cols-2 lg:grid-cols-3">

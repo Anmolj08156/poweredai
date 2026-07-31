@@ -31,11 +31,11 @@ import {
 /* --------------------------------- Nav ---------------------------------- */
 
 export const NAV_LINKS = [
-  { label: "Features", href: "#features" },
+  { label: "Product", href: "#features" },
   { label: "For Educators", href: "#audiences" },
-  { label: "Explore", href: "#explore" },
-  { label: "How it works", href: "#how" },
-  { label: "FAQ", href: "#faq" },
+  { label: "For Institutions", href: "#audiences" },
+  { label: "Pricing", href: "#early-access" },
+  { label: "Resources", href: "#explore" },
 ] as const;
 
 /** Quick capability pills shown under the hero. */

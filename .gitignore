@@ -45,3 +45,6 @@ coverage
 # Source brand image (generated assets are committed in public/ instead)
 WhatsApp Image*
 brand-logo-src.*
+
+# App screenshot sources (optimized WebPs are committed in public/app/)
+Apppics/
