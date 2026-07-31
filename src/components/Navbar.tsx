@@ -41,9 +41,15 @@ export function Navbar() {
               : "border border-transparent bg-transparent"
           )}
         >
-          <a href="#top" onClick={() => handleAnchor("#top")} aria-label="StudNexus home">
+          <button
+            onClick={() => {
+              setOpen(false);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            aria-label="StudNexus home"
+          >
             <Logo />
-          </a>
+          </button>
 
           <nav className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => (
