@@ -5,10 +5,13 @@
  * variables (Vite `VITE_*`). Nothing is loaded unless an id/key is provided,
  * keeping the landing page fast and privacy-friendly out of the box.
  *
- *   VITE_GA_ID         Google Analytics 4 measurement id (G-XXXXXXX)
- *   VITE_CLARITY_ID    Microsoft Clarity project id
- *   VITE_POSTHOG_KEY   PostHog project API key
- *   VITE_POSTHOG_HOST  PostHog host (defaults to https://app.posthog.com)
+ *   VITE_GA_ID           Google Analytics 4 measurement id (G-XXXXXXX)
+ *   VITE_GOOGLE_ADS_ID   Google Ads conversion id (AW-XXXXXXXXX) — needed so an ad
+ *                        click that lands here is remembered (gclid) and attributed
+ *                        when the visitor signs up on app.studnexus.com.
+ *   VITE_CLARITY_ID      Microsoft Clarity project id
+ *   VITE_POSTHOG_KEY     PostHog project API key
+ *   VITE_POSTHOG_HOST    PostHog host (defaults to https://app.posthog.com)
  */
 
 declare global {
@@ -30,15 +33,19 @@ function injectScript(src: string, async = true) {
   return s;
 }
 
-function initGA(id: string) {
+function initGoogleTag(gaId?: string, adsId?: string) {
   window.dataLayer = window.dataLayer || [];
   window.gtag = function gtag() {
     // eslint-disable-next-line prefer-rest-params
     window.dataLayer!.push(arguments);
   };
   window.gtag("js", new Date());
-  window.gtag("config", id, { anonymize_ip: true });
-  injectScript(`https://www.googletagmanager.com/gtag/js?id=${id}`);
+  // One gtag.js load serves both GA4 and Google Ads (multiple `config` ids). The
+  // Ads config sets the conversion-linker cookie on .studnexus.com, so the gclid
+  // carries over to app.studnexus.com where the signup conversion actually fires.
+  injectScript(`https://www.googletagmanager.com/gtag/js?id=${gaId || adsId}`);
+  if (gaId) window.gtag("config", gaId, { anonymize_ip: true });
+  if (adsId) window.gtag("config", adsId);
 }
 
 function initClarity(id: string) {
@@ -72,12 +79,13 @@ export function initAnalytics() {
   initialised = true;
 
   const ga = import.meta.env.VITE_GA_ID;
+  const ads = import.meta.env.VITE_GOOGLE_ADS_ID;
   const clarity = import.meta.env.VITE_CLARITY_ID;
   const ph = import.meta.env.VITE_POSTHOG_KEY;
   const phHost = import.meta.env.VITE_POSTHOG_HOST || "https://app.posthog.com";
 
   try {
-    if (ga) initGA(ga);
+    if (ga || ads) initGoogleTag(ga, ads);
     if (clarity) initClarity(clarity);
     if (ph) initPostHog(ph, phHost);
   } catch {
