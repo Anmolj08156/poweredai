@@ -25,6 +25,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/ai-quiz-generator" element={<SeoPage slug="ai-quiz-generator" />} />
           <Route path="/study-planner" element={<SeoPage slug="study-planner" />} />
           <Route path="/community" element={<SeoPage slug="community" />} />
+          <Route path="/studynexus" element={<SeoPage slug="studynexus" />} />
+          <Route path="/study-nexus" element={<SeoPage slug="studynexus" />} />
           <Route path="/privacy" element={<LegalPage slug="privacy" />} />
           <Route path="/terms" element={<LegalPage slug="terms" />} />
           <Route path="/admin/email" element={<AdminEmail />} />

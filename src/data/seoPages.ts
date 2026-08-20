@@ -305,6 +305,66 @@ export const SEO_PAGES: SeoPage[] = [
     ],
     related: ["what-is-studnexus", "ai-notes-generator", "study-planner"],
   },
+
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "studynexus",
+    icon: Sparkles,
+    eyebrow: "StudyNexus & StudNexus",
+    metaTitle: "StudyNexus / StudNexus — The All-In-One AI Learning Operating System",
+    metaDescription:
+      "Looking for StudyNexus or StudNexus? StudNexus is the AI-powered learning OS helping students organize notes, chat with PDFs, generate quizzes, and master exams.",
+    h1: "StudyNexus is StudNexus — The AI Learning Operating System",
+    intro:
+      "Whether you searched for StudyNexus or StudNexus, you are in the exact right place. StudNexus is the AI-powered Learning Operating System designed to replace fragmented study tools with a unified, intelligent study workspace.",
+    keywords: [
+      "StudyNexus",
+      "Study Nexus",
+      "studynexus",
+      "study nexus app",
+      "StudNexus AI",
+      "AI learning platform",
+      "AI notes generator",
+    ],
+    sections: [
+      {
+        heading: "Looking for StudyNexus? Meet StudNexus",
+        body: [
+          "Many learners search for StudyNexus or Study Nexus when looking for the AI-powered learning platform built for serious students. StudNexus is the official home of the AI Learning Operating System.",
+          "Instead of switching between note apps, PDF readers, flashcard tools, and quiz apps, StudNexus connects everything in one intelligent flow.",
+        ],
+      },
+      {
+        heading: "Core Features of StudNexus (StudyNexus)",
+        body: ["Here is what you get inside StudNexus:"],
+        bullets: [
+          "AI Notes Generator: Convert long lectures, slides, and PDFs into structured notes in seconds",
+          "Chat with PDFs: Instant contextual Q&A with your books and syllabi",
+          "Smart Quiz & Mock Test Generator: Test yourself directly from your study material",
+          "Adaptive Study Planner: Pace your preparation around upcoming exam dates",
+          "Knowledge Retention & Revision: Spaced repetition to make sure you never forget",
+          "Community & Notes Marketplace: Discover top notes from educators and toppers",
+        ],
+      },
+      {
+        heading: "Who is StudNexus built for?",
+        body: [
+          "From college students (engineering, medicine, commerce) to competitive exam aspirants (UPSC, GATE, CAT, JEE, NEET, Government exams), StudNexus is built to help you learn faster, retain longer, and score higher.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Is StudyNexus the same as StudNexus?",
+        a: "Yes! StudNexus is frequently searched as StudyNexus or Study Nexus. StudNexus is the official name of the platform.",
+      },
+      {
+        q: "How can I get early access?",
+        a: "You can join our early access beta waitlist directly on our homepage to get priority access and free premium perks during launch.",
+      },
+    ],
+    related: ["what-is-studnexus", "ai-notes-generator", "chat-with-pdfs", "ai-quiz-generator"],
+  },
 ];
 
 export function getSeoPage(slug: string): SeoPage | undefined {

@@ -13,6 +13,7 @@ const SUMMARY: Record<string, string> = {
   "ai-quiz-generator": "Create smart quizzes and mock tests from your material.",
   "study-planner": "Build an adaptive plan around your syllabus and exam date.",
   community: "Educators & creators publish, share and promote their notes.",
+  studynexus: "The AI Learning Operating System (also searched as StudyNexus).",
 };
 
 export function ExplorePages() {
