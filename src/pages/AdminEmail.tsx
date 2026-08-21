@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import {
@@ -14,6 +14,13 @@ import {
   LogOut,
   Home,
   Users,
+  Bold,
+  Italic,
+  Link as LinkIcon,
+  List,
+  Eye,
+  Edit3,
+  Sparkles,
 } from "lucide-react";
 import { AmbientBackground } from "../components/ui/AmbientBackground";
 import { Logo } from "../components/ui/Logo";
@@ -93,8 +100,8 @@ function Gate({ onUnlock }: { onUnlock: (pw: string, from: string | null, replyT
         setMsg("Incorrect password.");
       }
     } catch {
-      setStatus("error");
-      setMsg("Backend unreachable. This tool only works on the deployed site (Cloudflare Worker).");
+        setStatus("error");
+        setMsg("Backend unreachable. This tool only works on the deployed site (Cloudflare Worker).");
     }
   }
 
@@ -143,11 +150,14 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
   const [body, setBody] = useState("");
   const [isHtml, setIsHtml] = useState(false);
   const [signature, setSignature] = useState(true);
+  const [activeTab, setActiveTab] = useState<"write" | "preview">("write");
   const [recipientsRaw, setRecipientsRaw] = useState("");
   const [attachment, setAttachment] = useState<{ filename: string; contentType: string; contentBase64: string; sizeKB: number } | null>(null);
   const [sending, setSending] = useState(false);
   const [audit, setAudit] = useState<AuditRow[]>([]);
   const [done, setDone] = useState(0);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const parsed = useMemo(() => {
     const tokens = recipientsRaw.split(/[\s,;]+/).map((t) => t.trim().toLowerCase()).filter(Boolean);
@@ -162,6 +172,55 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
     }
     return { valid, invalid };
   }, [recipientsRaw]);
+
+  // Compute rendered HTML for live preview or sending
+  const previewHtml = useMemo(() => {
+    let contentHtml = isHtml ? body : renderMarkdownToHtml(body);
+    if (signature) {
+      contentHtml += signatureHtml();
+    }
+    return contentHtml;
+  }, [body, isHtml, signature]);
+
+  function handleFormat(prefix: string, suffix: string = prefix, defaultText: string = "text") {
+    const textarea = textareaRef.current;
+    if (!textarea) {
+      setBody((prev) => prev + `${prefix}${defaultText}${suffix}`);
+      return;
+    }
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = body.substring(start, end);
+
+    let newText: string;
+    let newEnd: number;
+
+    if (selected.length > 0) {
+      if (selected.startsWith(prefix) && selected.endsWith(suffix) && selected.length >= prefix.length + suffix.length) {
+        // Toggle off
+        const unescaped = selected.substring(prefix.length, selected.length - suffix.length);
+        newText = body.substring(0, start) + unescaped + body.substring(end);
+        newEnd = start + unescaped.length;
+      } else {
+        // Apply format
+        newText = body.substring(0, start) + prefix + selected + suffix + body.substring(end);
+        newEnd = end + prefix.length + suffix.length;
+      }
+    } else {
+      const inserted = `${prefix}${defaultText}${suffix}`;
+      newText = body.substring(0, start) + inserted + body.substring(end);
+      newEnd = start + prefix.length + defaultText.length;
+    }
+
+    setBody(newText);
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(
+        selected.length > 0 ? start + prefix.length : start + prefix.length,
+        selected.length > 0 ? end + prefix.length : newEnd
+      );
+    }, 0);
+  }
 
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -188,17 +247,23 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
     setDone(0);
     setAudit(recipients.map((email) => ({ email, status: "pending" as const })));
 
-    // Append the Anushka signature (forces HTML) if enabled.
-    let finalBody = body;
-    let finalIsHtml = isHtml;
-    if (signature) {
-      const base = isHtml ? body : escapeHtml(body).replace(/\n/g, "<br>");
-      finalBody = base + signatureHtml();
-      finalIsHtml = true;
+    // Prepare final HTML content for AWS SES
+    let finalBody = isHtml ? body : renderMarkdownToHtml(body);
+    if (isHtml) {
+      // In raw HTML mode, convert any markdown **bold** or *italic* tags if typed
+      finalBody = finalBody
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/__(.*?)__/g, "<strong>$1</strong>")
+        .replace(/\*(.*?)\*/g, "<em>$1</em>")
+        .replace(/_(.*?)_/g, "<em>$1</em>");
     }
 
-    // Big attachments blow the Worker's memory/time limit, so shrink the batch
-    // as the attachment grows. No attachment → full batches.
+    if (signature) {
+      finalBody = finalBody + signatureHtml();
+    }
+    const finalIsHtml = true; // Always send HTML so formatting (bold, italic, signature) is preserved
+
+    // Big attachments blow the Worker's memory/time limit, so shrink batch size
     const attKB = attachment ? attachment.sizeKB : 0;
     const batchSize = attKB === 0 ? BATCH_SIZE : attKB <= 200 ? 8 : attKB <= 800 ? 3 : 1;
 
@@ -215,7 +280,7 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
         try {
           data = JSON.parse(text);
         } catch {
-          data = null; // non-JSON (e.g. a Cloudflare/HTML error page)
+          data = null; // non-JSON (e.g. Cloudflare error page)
         }
 
         if (res.ok && data && Array.isArray(data.results)) {
@@ -287,26 +352,118 @@ function Mailer({ password, fromAddr, replyTo, onLogout }: { password: string; f
                   className={inputCls}
                 />
 
-                <div className="mt-4 flex items-center justify-between">
-                  <label className="text-xs font-medium text-ink-muted">Message</label>
-                  <div className="flex items-center gap-4">
-                    <label className="flex items-center gap-2 text-xs text-ink-soft">
-                      <input type="checkbox" checked={signature} onChange={(e) => setSignature(e.target.checked)} className="accent-brand-500" />
-                      Signature
-                    </label>
-                    <label className="flex items-center gap-2 text-xs text-ink-soft">
-                      <input type="checkbox" checked={isHtml} onChange={(e) => setIsHtml(e.target.checked)} className="accent-brand-500" />
-                      HTML
-                    </label>
+                {/* Message Header / Toolbar */}
+                <div className="mt-4 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium text-ink-muted">Message</span>
+                    {/* Write / Preview Tab switcher */}
+                    <div className="flex rounded-lg border border-ink-border bg-neutral-100 p-0.5">
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab("write")}
+                        className={cn(
+                          "flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-all",
+                          activeTab === "write" ? "bg-white text-neutral-900 shadow-sm" : "text-ink-soft hover:text-neutral-700"
+                        )}
+                      >
+                        <Edit3 className="h-3 w-3" /> Write
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab("preview")}
+                        className={cn(
+                          "flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-all",
+                          activeTab === "preview" ? "bg-white text-brand-600 shadow-sm" : "text-ink-soft hover:text-neutral-700"
+                        )}
+                      >
+                        <Eye className="h-3 w-3" /> Preview
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Format toolbar buttons */}
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div className="flex items-center gap-1 rounded-lg border border-ink-border bg-white px-1.5 py-1">
+                      <button
+                        type="button"
+                        onClick={() => handleFormat("**", "**", "bold text")}
+                        title="Bold (**text**)"
+                        className="rounded p-1 text-neutral-700 hover:bg-neutral-100"
+                      >
+                        <Bold className="h-3.5 w-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleFormat("*", "*", "italic text")}
+                        title="Italic (*text*)"
+                        className="rounded p-1 text-neutral-700 hover:bg-neutral-100"
+                      >
+                        <Italic className="h-3.5 w-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleFormat("[", "](https://example.com)", "link title")}
+                        title="Insert Link ([text](url))"
+                        className="rounded p-1 text-neutral-700 hover:bg-neutral-100"
+                      >
+                        <LinkIcon className="h-3.5 w-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleFormat("- ", "", "bullet item")}
+                        title="Bullet List (- item)"
+                        className="rounded p-1 text-neutral-700 hover:bg-neutral-100"
+                      >
+                        <List className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <label className="flex items-center gap-1.5 text-xs text-ink-soft">
+                        <input type="checkbox" checked={signature} onChange={(e) => setSignature(e.target.checked)} className="accent-brand-500" />
+                        Signature
+                      </label>
+                      <label className="flex items-center gap-1.5 text-xs text-ink-soft">
+                        <input type="checkbox" checked={isHtml} onChange={(e) => setIsHtml(e.target.checked)} className="accent-brand-500" />
+                        HTML Mode
+                      </label>
+                    </div>
                   </div>
                 </div>
-                <textarea
-                  value={body}
-                  onChange={(e) => setBody(e.target.value)}
-                  rows={10}
-                  placeholder={isHtml ? "<p>Hello…</p>" : "Write your message…"}
-                  className={cn(inputCls, "mt-1.5 resize-y font-mono text-[13px] leading-relaxed")}
-                />
+
+                {activeTab === "write" ? (
+                  <>
+                    <textarea
+                      ref={textareaRef}
+                      value={body}
+                      onChange={(e) => setBody(e.target.value)}
+                      rows={10}
+                      placeholder={isHtml ? "<p>Hello…</p>" : "Write your message… (Highlight text & click B to make it bold!)"}
+                      className={cn(inputCls, "mt-2 resize-y font-mono text-[13px] leading-relaxed")}
+                    />
+                    <div className="mt-1.5 flex items-center justify-between text-[11px] text-ink-soft">
+                      <span className="flex items-center gap-1 text-amber-600">
+                        <Sparkles className="h-3 w-3" /> **bold**, *italic*, links and lists automatically format into bold rich email.
+                      </span>
+                      <span>{body.length} chars</span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="mt-2 rounded-xl border border-ink-border bg-white p-5">
+                    <div className="border-b border-neutral-100 pb-3 mb-4">
+                      <p className="text-xs text-ink-soft">Subject: <span className="font-semibold text-neutral-900">{subject || "(No subject set)"}</span></p>
+                      <p className="text-xs text-ink-soft mt-0.5">Format: <span className="text-emerald-600 font-medium">Rich HTML Email</span></p>
+                    </div>
+                    {body.trim() ? (
+                      <div
+                        className="prose prose-sm max-w-none text-neutral-800 leading-relaxed font-sans"
+                        dangerouslySetInnerHTML={{ __html: previewHtml }}
+                      />
+                    ) : (
+                      <p className="text-xs italic text-ink-soft">No message content to preview. Write something first!</p>
+                    )}
+                  </div>
+                )}
 
                 {/* Attachment */}
                 <div className="mt-4">
@@ -440,8 +597,66 @@ function Stat({ label, value, tone }: { label: string; value: number; tone: "eme
 
 /* -------------------------------- helpers ------------------------------- */
 
-function escapeHtml(s: string): string {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function renderMarkdownToHtml(markdown: string): string {
+  if (!markdown) return "";
+  let text = markdown.replace(/\r\n/g, "\n");
+
+  // Headings
+  text = text.replace(/^### (.*$)/gim, '<h3 style="font-size:15px;font-weight:bold;margin-top:14px;margin-bottom:6px;color:#111827;">$1</h3>');
+  text = text.replace(/^## (.*$)/gim, '<h2 style="font-size:17px;font-weight:bold;margin-top:18px;margin-bottom:8px;color:#111827;">$1</h2>');
+  text = text.replace(/^# (.*$)/gim, '<h1 style="font-size:20px;font-weight:bold;margin-top:22px;margin-bottom:10px;color:#111827;">$1</h1>');
+
+  // Bold: **text** or __text__ -> <strong>text</strong>
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/__(.*?)__/g, '<strong>$1</strong>');
+
+  // Italic: *text* or _text_ -> <em>text</em>
+  text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  text = text.replace(/_(.*?)_/g, '<em>$1</em>');
+
+  // Links: [text](url) -> <a href="url">text</a>
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#d97706;text-decoration:underline;" target="_blank" rel="noopener noreferrer">$1</a>');
+
+  // Lists: lines starting with "- " or "* "
+  const lines = text.split('\n');
+  let inList = false;
+  const processedLines: string[] = [];
+
+  for (const line of lines) {
+    const listMatch = line.match(/^[\*\-]\s+(.*)/);
+    if (listMatch) {
+      if (!inList) {
+        inList = true;
+        processedLines.push('<ul style="margin-top:6px;margin-bottom:10px;padding-left:20px;list-style-type:disc;">');
+      }
+      processedLines.push(`<li style="margin-bottom:3px;line-height:1.5;">${listMatch[1]}</li>`);
+    } else {
+      if (inList) {
+        inList = false;
+        processedLines.push('</ul>');
+      }
+      processedLines.push(line);
+    }
+  }
+  if (inList) {
+    processedLines.push('</ul>');
+  }
+
+  const combined = processedLines.join('\n');
+  const paragraphs = combined.split(/\n\s*\n/);
+
+  return paragraphs
+    .map((p) => {
+      const trimmed = p.trim();
+      if (!trimmed) return "";
+      if (/^<(h[1-6]|ul|ol|p|div|table|blockquote)/i.test(trimmed)) {
+        return trimmed;
+      }
+      const withBr = trimmed.replace(/\n/g, "<br>");
+      return `<p style="margin-bottom:12px;line-height:1.6;color:#1a1a1a;font-size:14px;">${withBr}</p>`;
+    })
+    .filter(Boolean)
+    .join("\n");
 }
 
 /** Email-safe HTML signature (photo hosted at /anmol.png — replace with a real photo). */
